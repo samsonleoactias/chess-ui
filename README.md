@@ -1,3 +1,20 @@
+# Chess UI!
+
+This is the UI for my chess app.
+
+## Goals
+
+My goal is to use React and Netxjs, among other technologies, to build a web-based chess game. This is the UI for the app.
+
+### The Plan
+
+1. React UI
+2. GraphQL interaction with the server to grab game data
+3. Interaction with pieces on board to play game
+4. Send new moves back to the server
+
+## Nextjs info
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

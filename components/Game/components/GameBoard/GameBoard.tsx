@@ -1,5 +1,6 @@
 import { Color } from "../../../../types";
 import { Grid } from "@mui/material";
+import GamePiece from "./components/GamePiece";
 
 type GameBoardProps = {
   humanColor: Color;

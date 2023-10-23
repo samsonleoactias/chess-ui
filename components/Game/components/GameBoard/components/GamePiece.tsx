@@ -22,3 +22,5 @@ const GamePiece = (props: GamePieceProps) => {
     </Typography>
   );
 };
+
+export default GamePiece;

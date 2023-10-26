@@ -12,9 +12,9 @@ const GamePiece = (props: GamePieceProps) => {
 
   const pieceColor = isHumanPiece(piece)
     ? humanColor
-    : humanColor == Color.White
-    ? Color.Black
-    : Color.White;
+    : humanColor == Color.WHITE
+    ? Color.BLACK
+    : Color.WHITE;
 
   return (
     <Typography variant="h6" color={pieceColor}>

@@ -7,13 +7,13 @@ import { GET_GAME, CREATE_GAME } from "@/graphql/queries";
 const Game = () => {
   const [start, setStart] = useState(true);
 
-  const {
-    loading: loadGameLoading,
-    error: loadGameError,
-    data: loadGameData,
-  } = useQuery(GET_GAME, {
-    variables: { humanPlayerId: "0001" },
-  }); // TODO human player ID variable
+  // const {
+  //   loading: loadGameLoading,
+  //   error: loadGameError,
+  //   data: loadGameData,
+  // } = useQuery(GET_GAME, {
+  //   variables: { humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8" },
+  // }); // TODO human player ID variable
 
   const [
     newGame,
@@ -25,7 +25,9 @@ const Game = () => {
   ] = useMutation(CREATE_GAME);
 
   const handleNewGame = () => {
-    newGame({ variables: { humanPlayerId: "0001" } });
+    newGame({
+      variables: { humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8" },
+    });
     setStart(false);
   };
 
@@ -33,13 +35,17 @@ const Game = () => {
     setStart(false);
   };
 
-  if (start || loadGameLoading) {
+  if (start) {
     return (
       <>
-        <Button variant="outlined" sx={{ margin: "10px" }}>
+        <Button
+          onClick={handleNewGame}
+          variant="outlined"
+          sx={{ margin: "10px" }}
+        >
           New Game
         </Button>
-        {loadGameLoading ||
+        {/* {loadGameLoading ||
         loadGameError ||
         loadGameData.humanWinner ||
         loadGameData.aiWinner ||
@@ -53,32 +59,39 @@ const Game = () => {
           </Button>
         ) : (
           <></>
-        )}
+        )} */}
       </>
     );
   }
 
-  if (loadGameData) {
-    return (
-      <GameBoard
-        pieceLocationsProp={loadGameData.pieceLocations}
-        possibleMovesProp={loadGameData.possibleMoves}
-        humanWinnerProp={loadGameData.humanWinner}
-        aiWinnerProp={loadGameData.aiWinner}
-        humanColorProp={loadGameData.humanColor}
-      />
-    );
-  }
+  // if (loadGameData) {
+  //   return (
+  //     <GameBoard
+  //       pieceLocationsProp={loadGameData.pieceLocations}
+  //       possibleMovesProp={loadGameData.possibleMoves}
+  //       humanWinnerProp={loadGameData.humanWinner}
+  //       aiWinnerProp={loadGameData.aiWinner}
+  //       humanColorProp={loadGameData.humanColor}
+  //     />
+  //   );
+  // }
 
   if (createGameData) {
     return (
       <GameBoard
-        pieceLocationsProp={createGameData.pieceLocations}
-        possibleMovesProp={createGameData.possibleMoves}
-        humanWinnerProp={createGameData.humanWinner}
-        aiWinnerProp={createGameData.aiWinner}
-        humanColorProp={createGameData.humanColor}
+        pieceLocationsProp={createGameData.createGame.pieceLocations}
+        possibleMovesProp={createGameData.createGame.possibleMoves}
+        humanWinnerProp={createGameData.createGame.humanWinner}
+        aiWinnerProp={createGameData.createGame.aiWinner}
+        humanColorProp={createGameData.createGame.humanColor}
       />
     );
   }
+
+  if (createGameError) {
+    return <>{JSON.stringify(createGameError)}</>;
+  }
+  return <></>;
 };
+
+export default Game;

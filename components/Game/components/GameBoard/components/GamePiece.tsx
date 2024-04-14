@@ -17,7 +17,10 @@ const GamePiece = (props: GamePieceProps) => {
     : Color.WHITE;
 
   return (
-    <Typography variant="h6" color={pieceColor}>
+    <Typography
+      variant="h6"
+      color={pieceColor === Color.WHITE ? "white" : "black"}
+    >
       {piece.slice(0, 1).toUpperCase() + piece.slice(1, 1).toLowerCase()}
     </Typography>
   );

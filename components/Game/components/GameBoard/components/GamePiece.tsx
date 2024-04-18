@@ -1,6 +1,7 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Color, Piece } from "../../../../../types";
 import isHumanPiece from "./helpers/isHumanPiece";
+import makePieceIcon from "./helpers/makePieceIcon";
 
 type GamePieceProps = {
   piece: Piece;
@@ -17,12 +18,25 @@ const GamePiece = (props: GamePieceProps) => {
     : Color.WHITE;
 
   return (
-    <Typography
-      variant="h6"
-      color={pieceColor === Color.WHITE ? "white" : "black"}
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        m: 0.5,
+        height: "75px",
+        border: 2,
+        borderColor: "red",
+        width: "75px",
+      }}
     >
-      {piece.slice(0, 1).toUpperCase() + piece.slice(1, 1).toLowerCase()}
-    </Typography>
+      <Typography
+        variant="h6"
+        color={pieceColor === Color.WHITE ? "white" : "black"}
+      >
+        {makePieceIcon(piece)}
+      </Typography>
+    </Box>
   );
 };
 

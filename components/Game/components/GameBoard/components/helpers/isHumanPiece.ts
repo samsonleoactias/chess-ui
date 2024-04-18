@@ -1,4 +1,4 @@
-import { Color, Piece } from "../../../../../../types";
+import { Piece } from "../../../../../../types";
 
 const isHumanPiece = (piece: Piece) => {
   const humanPieces = [

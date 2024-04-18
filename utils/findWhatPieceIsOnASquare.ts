@@ -118,7 +118,7 @@ const findWhatPieceIsOnASquare = (
     pieceLocations.humanBishopB.column === column &&
     pieceLocations.humanBishopB.captured === false
   ) {
-    return Piece.HumanPawnF;
+    return Piece.HumanBishopB;
   }
 
   if (
@@ -246,7 +246,7 @@ const findWhatPieceIsOnASquare = (
     pieceLocations.aiBishopB.column === column &&
     pieceLocations.aiBishopB.captured === false
   ) {
-    return Piece.AiPawnF;
+    return Piece.AiBishopB;
   }
 
   if (

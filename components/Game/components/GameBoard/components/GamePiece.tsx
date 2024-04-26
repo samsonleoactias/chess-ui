@@ -2,14 +2,16 @@ import { Box, Typography } from "@mui/material";
 import { Color, Piece } from "../../../../../types";
 import isHumanPiece from "./helpers/isHumanPiece";
 import makePieceIcon from "./helpers/makePieceIcon";
+import { useState } from "react";
 
 type GamePieceProps = {
   piece: Piece;
   humanColor: Color;
+  selected: boolean;
 };
 
 const GamePiece = (props: GamePieceProps) => {
-  const { piece, humanColor } = props;
+  const { piece, humanColor, selected } = props;
 
   const pieceColor = isHumanPiece(piece)
     ? humanColor
@@ -25,7 +27,7 @@ const GamePiece = (props: GamePieceProps) => {
       sx={{
         m: 0.5,
         height: "75px",
-        border: 2,
+        border: selected ? 6 : 2,
         borderColor: "red",
         width: "75px",
       }}

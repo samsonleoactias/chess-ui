@@ -1,5 +1,7 @@
 import { Piece, Icons } from "@/types";
 
+// TODO make actual icons rather than letters
+
 const icons: Icons = {
   humanPawnA: "Pa",
   humanPawnB: "Pa",

@@ -1,6 +1,6 @@
 import { Piece } from "../../../../../../types";
 
-const isHumanPiece = (piece: Piece) => {
+const isHumanPiece = (piece: Piece): boolean => {
   const humanPieces = [
     Piece.HumanBishopA,
     Piece.HumanBishopB,

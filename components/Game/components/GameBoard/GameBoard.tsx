@@ -3,11 +3,13 @@ import {
   PieceLocations,
   PossibleMovesAssignedToPieces,
   SelectedSpots,
+  Spot,
 } from "../../../../types";
 import { Grid } from "@mui/material";
 import { useState } from "react";
 import findWhatPieceIsOnASquare from "../../../../utils/findWhatPieceIsOnASquare";
 import GamePiece from "./components/GamePiece";
+import generateSelectedSpot from "./helpers";
 
 type GameBoardProps = {
   pieceLocationsProp: PieceLocations;
@@ -35,135 +37,80 @@ const GameBoard = (props: GameBoardProps) => {
   const [aiColor, setAiColor] = useState<Color>(
     humanColorProp === Color.WHITE ? Color.BLACK : Color.WHITE
   );
-  const [selected, setSelected] = useState<SelectedSpots>({
-    spot8a: false,
-    spot8b: false,
-    spot8c: false,
-    spot8d: false,
-    spot8e: false,
-    spot8f: false,
-    spot8g: false,
-    spot8h: false,
-    spot7a: false,
-    spot7b: false,
-    spot7c: false,
-    spot7d: false,
-    spot7e: false,
-    spot7f: false,
-    spot7g: false,
-    spot7h: false,
-    spot6a: false,
-    spot6b: false,
-    spot6c: false,
-    spot6d: false,
-    spot6e: false,
-    spot6f: false,
-    spot6g: false,
-    spot6h: false,
-    spot5a: false,
-    spot5b: false,
-    spot5c: false,
-    spot5d: false,
-    spot5e: false,
-    spot5f: false,
-    spot5g: false,
-    spot5h: false,
-    spot4a: false,
-    spot4b: false,
-    spot4c: false,
-    spot4d: false,
-    spot4e: false,
-    spot4f: false,
-    spot4g: false,
-    spot4h: false,
-    spot3a: false,
-    spot3b: false,
-    spot3c: false,
-    spot3d: false,
-    spot3e: false,
-    spot3f: false,
-    spot3g: false,
-    spot3h: false,
-    spot2a: false,
-    spot2b: false,
-    spot2c: false,
-    spot2d: false,
-    spot2e: false,
-    spot2f: false,
-    spot2g: false,
-    spot2h: false,
-    spot1a: false,
-    spot1b: false,
-    spot1c: false,
-    spot1d: false,
-    spot1e: false,
-    spot1f: false,
-    spot1g: false,
-    spot1h: false,
-  });
+  const [selected, setSelected] = useState<SelectedSpots>(
+    generateSelectedSpot()
+  );
 
   // TODO check for winner
 
-  const handleSelectSpot = () => {};
+  const handleSelectSpot = (selectedSpot: Spot) => {
+    setSelected(generateSelectedSpot(selectedSpot));
+  };
 
   return (
     <>
       <Grid container spacing={1}>
         <Grid container spacing={1}>
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            onClick={() => {
+              handleSelectSpot(Spot.SPOT8A);
+            }}
+          >
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 0)}
               humanColor={humanColor}
-              selected={selected.spot8a}
+              selected={selected[Spot.SPOT8A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 1)}
               humanColor={humanColor}
-              selected={selected.spot8b}
+              selected={selected[Spot.SPOT8B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 2)}
               humanColor={humanColor}
-              selected={selected.spot8c}
+              selected={selected[Spot.SPOT8C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 3)}
               humanColor={humanColor}
-              selected={selected.spot8d}
+              selected={selected[Spot.SPOT8D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 4)}
               humanColor={humanColor}
-              selected={selected.spot8e}
+              selected={selected[Spot.SPOT8E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 5)}
               humanColor={humanColor}
-              selected={selected.spot8f}
+              selected={selected[Spot.SPOT8F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 6)}
               humanColor={humanColor}
-              selected={selected.spot8g}
+              selected={selected[Spot.SPOT8G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 7)}
               humanColor={humanColor}
-              selected={selected.spot8h}
+              selected={selected[Spot.SPOT8H]}
             />
           </Grid>
         </Grid>
@@ -172,56 +119,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 0)}
               humanColor={humanColor}
-              selected={selected.spot7a}
+              selected={selected[Spot.SPOT7A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 1)}
               humanColor={humanColor}
-              selected={selected.spot7b}
+              selected={selected[Spot.SPOT7B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 2)}
               humanColor={humanColor}
-              selected={selected.spot7c}
+              selected={selected[Spot.SPOT7C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 3)}
               humanColor={humanColor}
-              selected={selected.spot7d}
+              selected={selected[Spot.SPOT7D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 4)}
               humanColor={humanColor}
-              selected={selected.spot7e}
+              selected={selected[Spot.SPOT7E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 5)}
               humanColor={humanColor}
-              selected={selected.spot7f}
+              selected={selected[Spot.SPOT7F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 6)}
               humanColor={humanColor}
-              selected={selected.spot7g}
+              selected={selected[Spot.SPOT7G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 7)}
               humanColor={humanColor}
-              selected={selected.spot7h}
+              selected={selected[Spot.SPOT7H]}
             />
           </Grid>
         </Grid>
@@ -230,56 +177,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 0)}
               humanColor={humanColor}
-              selected={selected.spot6a}
+              selected={selected[Spot.SPOT6A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 1)}
               humanColor={humanColor}
-              selected={selected.spot6b}
+              selected={selected[Spot.SPOT6B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 2)}
               humanColor={humanColor}
-              selected={selected.spot6c}
+              selected={selected[Spot.SPOT6C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 3)}
               humanColor={humanColor}
-              selected={selected.spot6d}
+              selected={selected[Spot.SPOT6D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 4)}
               humanColor={humanColor}
-              selected={selected.spot6e}
+              selected={selected[Spot.SPOT6E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 5)}
               humanColor={humanColor}
-              selected={selected.spot6f}
+              selected={selected[Spot.SPOT6F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 6)}
               humanColor={humanColor}
-              selected={selected.spot6g}
+              selected={selected[Spot.SPOT6G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 7)}
               humanColor={humanColor}
-              selected={selected.spot6h}
+              selected={selected[Spot.SPOT6H]}
             />
           </Grid>
         </Grid>
@@ -288,56 +235,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 0)}
               humanColor={humanColor}
-              selected={selected.spot5a}
+              selected={selected[Spot.SPOT5A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 1)}
               humanColor={humanColor}
-              selected={selected.spot5b}
+              selected={selected[Spot.SPOT5B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 2)}
               humanColor={humanColor}
-              selected={selected.spot5c}
+              selected={selected[Spot.SPOT5C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 3)}
               humanColor={humanColor}
-              selected={selected.spot5d}
+              selected={selected[Spot.SPOT5D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 4)}
               humanColor={humanColor}
-              selected={selected.spot5e}
+              selected={selected[Spot.SPOT5E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 5)}
               humanColor={humanColor}
-              selected={selected.spot5f}
+              selected={selected[Spot.SPOT5F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 6)}
               humanColor={humanColor}
-              selected={selected.spot5g}
+              selected={selected[Spot.SPOT5G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 7)}
               humanColor={humanColor}
-              selected={selected.spot5h}
+              selected={selected[Spot.SPOT5H]}
             />
           </Grid>
         </Grid>
@@ -346,56 +293,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 0)}
               humanColor={humanColor}
-              selected={selected.spot4a}
+              selected={selected[Spot.SPOT4A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 1)}
               humanColor={humanColor}
-              selected={selected.spot4b}
+              selected={selected[Spot.SPOT4B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 2)}
               humanColor={humanColor}
-              selected={selected.spot4c}
+              selected={selected[Spot.SPOT4C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 3)}
               humanColor={humanColor}
-              selected={selected.spot4d}
+              selected={selected[Spot.SPOT4D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 4)}
               humanColor={humanColor}
-              selected={selected.spot4e}
+              selected={selected[Spot.SPOT4E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 5)}
               humanColor={humanColor}
-              selected={selected.spot4f}
+              selected={selected[Spot.SPOT4F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 6)}
               humanColor={humanColor}
-              selected={selected.spot4g}
+              selected={selected[Spot.SPOT4G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 7)}
               humanColor={humanColor}
-              selected={selected.spot4h}
+              selected={selected[Spot.SPOT4H]}
             />
           </Grid>
         </Grid>
@@ -404,56 +351,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 0)}
               humanColor={humanColor}
-              selected={selected.spot3a}
+              selected={selected[Spot.SPOT3A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 1)}
               humanColor={humanColor}
-              selected={selected.spot3b}
+              selected={selected[Spot.SPOT3B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 2)}
               humanColor={humanColor}
-              selected={selected.spot3c}
+              selected={selected[Spot.SPOT3C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 3)}
               humanColor={humanColor}
-              selected={selected.spot3d}
+              selected={selected[Spot.SPOT3D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 4)}
               humanColor={humanColor}
-              selected={selected.spot3e}
+              selected={selected[Spot.SPOT3E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 5)}
               humanColor={humanColor}
-              selected={selected.spot3f}
+              selected={selected[Spot.SPOT3F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 6)}
               humanColor={humanColor}
-              selected={selected.spot3g}
+              selected={selected[Spot.SPOT3G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 7)}
               humanColor={humanColor}
-              selected={selected.spot3h}
+              selected={selected[Spot.SPOT3H]}
             />
           </Grid>
         </Grid>
@@ -462,56 +409,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 0)}
               humanColor={humanColor}
-              selected={selected.spot2a}
+              selected={selected[Spot.SPOT2A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 1)}
               humanColor={humanColor}
-              selected={selected.spot2b}
+              selected={selected[Spot.SPOT2B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 2)}
               humanColor={humanColor}
-              selected={selected.spot2c}
+              selected={selected[Spot.SPOT2C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 3)}
               humanColor={humanColor}
-              selected={selected.spot2d}
+              selected={selected[Spot.SPOT2D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 4)}
               humanColor={humanColor}
-              selected={selected.spot2e}
+              selected={selected[Spot.SPOT2E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 5)}
               humanColor={humanColor}
-              selected={selected.spot2f}
+              selected={selected[Spot.SPOT2F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 6)}
               humanColor={humanColor}
-              selected={selected.spot2g}
+              selected={selected[Spot.SPOT2G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 7)}
               humanColor={humanColor}
-              selected={selected.spot2h}
+              selected={selected[Spot.SPOT2H]}
             />
           </Grid>
         </Grid>
@@ -520,56 +467,56 @@ const GameBoard = (props: GameBoardProps) => {
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 0)}
               humanColor={humanColor}
-              selected={selected.spot1a}
+              selected={selected[Spot.SPOT1A]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 1)}
               humanColor={humanColor}
-              selected={selected.spot1b}
+              selected={selected[Spot.SPOT1B]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 2)}
               humanColor={humanColor}
-              selected={selected.spot1c}
+              selected={selected[Spot.SPOT1C]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 3)}
               humanColor={humanColor}
-              selected={selected.spot1d}
+              selected={selected[Spot.SPOT1D]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 4)}
               humanColor={humanColor}
-              selected={selected.spot1e}
+              selected={selected[Spot.SPOT1E]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 5)}
               humanColor={humanColor}
-              selected={selected.spot1f}
+              selected={selected[Spot.SPOT1F]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 6)}
               humanColor={humanColor}
-              selected={selected.spot1g}
+              selected={selected[Spot.SPOT1G]}
             />
           </Grid>
           <Grid item xs={1}>
             <GamePiece
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 7)}
               humanColor={humanColor}
-              selected={selected.spot1h}
+              selected={selected[Spot.SPOT1H]}
             />
           </Grid>
         </Grid>

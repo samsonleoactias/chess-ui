@@ -519,7 +519,7 @@ const CREATE_GAME = gql`
         matrix
       }
       possibleMoves {
-        pawnA {
+        humanPawnA {
           location {
             row
             column
@@ -530,7 +530,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnB {
+        humanPawnB {
           location {
             row
             column
@@ -541,7 +541,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnC {
+        humanPawnC {
           location {
             row
             column
@@ -552,7 +552,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnD {
+        humanPawnD {
           location {
             row
             column
@@ -563,7 +563,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnE {
+        humanPawnE {
           location {
             row
             column
@@ -574,7 +574,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnF {
+        humanPawnF {
           location {
             row
             column
@@ -585,7 +585,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnG {
+        humanPawnG {
           location {
             row
             column
@@ -596,7 +596,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        pawnH {
+        humanPawnH {
           location {
             row
             column
@@ -607,7 +607,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        rookA {
+        humanRookA {
           location {
             row
             column
@@ -618,7 +618,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        rookB {
+        humanRookB {
           location {
             row
             column
@@ -629,7 +629,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        knightA {
+        humanKnightA {
           location {
             row
             column
@@ -640,7 +640,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        knightB {
+        humanKnightB {
           location {
             row
             column
@@ -651,7 +651,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        bishopA {
+        humanBishopA {
           location {
             row
             column
@@ -662,7 +662,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        bishopB {
+        humanBishopB {
           location {
             row
             column
@@ -673,7 +673,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        queen {
+        humanQueen {
           location {
             row
             column
@@ -684,7 +684,7 @@ const CREATE_GAME = gql`
             column
           }
         }
-        king {
+        humanKing {
           location {
             row
             column

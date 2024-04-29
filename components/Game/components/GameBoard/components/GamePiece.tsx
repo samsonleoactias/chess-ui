@@ -8,14 +8,15 @@ type GamePieceProps = {
   piece: Piece;
   humanColor: Color;
   selected: boolean;
+  possibleMove: boolean;
 };
 
 const GamePiece = (props: GamePieceProps) => {
-  const { piece, humanColor, selected } = props;
+  const { piece, humanColor, selected, possibleMove } = props;
 
   const pieceColor = isHumanPiece(piece)
     ? humanColor
-    : humanColor == Color.WHITE
+    : humanColor === Color.WHITE
     ? Color.BLACK
     : Color.WHITE;
 
@@ -27,8 +28,8 @@ const GamePiece = (props: GamePieceProps) => {
       sx={{
         m: 0.5,
         height: "75px",
-        border: selected ? 6 : 2,
-        borderColor: "red",
+        border: (isHumanPiece(piece) && selected) || possibleMove ? 6 : 2,
+        borderColor: possibleMove ? "purple" : "red",
         width: "75px",
       }}
     >

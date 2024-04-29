@@ -1,3 +1,9 @@
-import generateSelectedSpot from "./generateSelectedSpot";
+import generateSelectedSquare from "./generateSelectedSquare";
+import generatePossibleMovesSquares from "./generatePossibleMovesSquares";
+import determineActiveSquare from "./determineActiveSquare";
 
-export default generateSelectedSpot;
+export {
+  generateSelectedSquare,
+  generatePossibleMovesSquares,
+  determineActiveSquare,
+};

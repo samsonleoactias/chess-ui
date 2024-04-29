@@ -1,5 +1,7 @@
 import { Piece, PieceLocations } from "../types";
 
+// TODO refactor to take Spot as an argument
+
 const findWhatPieceIsOnASquare = (
   pieceLocations: PieceLocations,
   row: number,

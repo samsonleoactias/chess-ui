@@ -1,6 +1,6 @@
 import { PossibleMove } from "@/types";
 
-const generatePossibleMovesSquares = (
+const generateActivePossibleMovesSquares = (
   possibleMoves?: PossibleMove[]
 ): boolean[][] => {
   let squares: boolean[][] = [
@@ -21,4 +21,4 @@ const generatePossibleMovesSquares = (
   return squares;
 };
 
-export default generatePossibleMovesSquares;
+export default generateActivePossibleMovesSquares;

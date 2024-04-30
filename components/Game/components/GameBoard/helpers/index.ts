@@ -1,9 +1,9 @@
 import generateSelectedSquare from "./generateSelectedSquare";
-import generatePossibleMovesSquares from "./generatePossibleMovesSquares";
+import generateActivePossibleMovesSquares from "./generateActivePossibleMovesSquares";
 import determineActiveSquare from "./determineActiveSquare";
 
 export {
   generateSelectedSquare,
-  generatePossibleMovesSquares,
+  generateActivePossibleMovesSquares,
   determineActiveSquare,
 };

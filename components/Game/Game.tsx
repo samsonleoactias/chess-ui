@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import GameBoard from "./components/GameBoard/GameBoard";
 import { Button } from "@mui/material";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_GAME, CREATE_GAME } from "@/graphql/queries";
+import GET_GAME from "@/graphql/queries";
+import { CREATE_GAME } from "@/graphql/mutations";
 
 const Game = () => {
   const [start, setStart] = useState(true);

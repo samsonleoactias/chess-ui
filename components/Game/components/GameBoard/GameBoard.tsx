@@ -5,14 +5,16 @@ import {
   Piece,
 } from "../../../../types";
 import { Grid } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import findWhatPieceIsOnASquare from "../../../../utils/findWhatPieceIsOnASquare";
 import GamePiece from "./components/GamePiece";
 import {
   generateSelectedSquare,
-  generatePossibleMovesSquares,
+  generateActivePossibleMovesSquares,
   determineActiveSquare,
 } from "./helpers";
+import { DO_TURN } from "@/graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 type GameBoardProps = {
   pieceLocationsProp: PieceLocations;
@@ -34,16 +36,31 @@ const GameBoard = (props: GameBoardProps) => {
   const [selected, setSelected] = useState<boolean[][]>(
     generateSelectedSquare()
   );
-  const [possibleMoves, setPossibleMoves] = useState<boolean[][]>(
-    generatePossibleMovesSquares()
+  const [activePossibleMoves, setActivePossibleMoves] = useState<boolean[][]>(
+    generateActivePossibleMovesSquares()
   );
   const [pieceLocations, setPieceLocations] =
     useState<PieceLocations>(pieceLocationsProp);
+  const [possibleMoves, setPossibleMoves] =
+    useState<PossibleMovesAssignedToPieces>(possibleMovesProp);
+  const [dataFromServerAfterMove, setDataFromServerAfterMove] = useState<{
+    possibleMoves: PossibleMovesAssignedToPieces;
+    pieceLocations: PieceLocations;
+  }>({ possibleMoves, pieceLocations });
+
+  const [
+    doTurn,
+    { loading: doTurnLoading, error: doTurnError, data: doTurnData },
+  ] = useMutation(DO_TURN);
 
   // TODO check for winner
 
   const handleClickSpot = (row: number, column: number) => {
-    if (possibleMoves[row][column] === true) {
+    if (
+      !doTurnLoading &&
+      !doTurnError &&
+      activePossibleMoves[row][column] === true
+    ) {
       let newPieceLocations: PieceLocations = pieceLocations;
 
       let activeSquare: { row: number; column: number } =
@@ -76,18 +93,45 @@ const GameBoard = (props: GameBoardProps) => {
 
       setPieceLocations(newPieceLocations);
       setSelected(generateSelectedSquare());
-      setPossibleMoves(generatePossibleMovesSquares());
-    } else {
+      setActivePossibleMoves(generateActivePossibleMovesSquares());
+
+      // TODO: side effects in this query
+      doTurn({
+        variables: {
+          humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8",
+          piece: activePiece.toString(),
+          move: JSON.stringify({ location: { row, column } }),
+        },
+      });
+    } else if (!doTurnLoading && !doTurnError) {
       setSelected(generateSelectedSquare(row, column));
-      setPossibleMoves(
-        generatePossibleMovesSquares(
-          possibleMovesProp[
-            findWhatPieceIsOnASquare(pieceLocations, row, column)
-          ]
+      setActivePossibleMoves(
+        generateActivePossibleMovesSquares(
+          possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
         )
       );
     }
   };
+
+  useEffect(() => {
+    if (
+      doTurnData &&
+      (doTurnData.doTurn.possibleMoves !==
+        dataFromServerAfterMove.possibleMoves ||
+        doTurnData.doTurn.pieceLocations !==
+          dataFromServerAfterMove.pieceLocations)
+    ) {
+      console.log(JSON.stringify(doTurnData.doTurn.possibleMoves));
+      setDataFromServerAfterMove({
+        possibleMoves: doTurnData.doTurn.possibleMoves,
+        pieceLocations: doTurnData.doTurn.pieceLocations,
+      });
+
+      setPieceLocations(doTurnData.doTurn.pieceLocations);
+
+      setPossibleMoves(doTurnData.doTurn.possibleMoves);
+    }
+  });
 
   return (
     <>
@@ -104,7 +148,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 0)}
               humanColor={humanColorProp}
               selected={selected[0][0]}
-              possibleMove={possibleMoves[0][0]}
+              possibleMove={activePossibleMoves[0][0]}
             />
           </Grid>
           <Grid
@@ -118,7 +162,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 1)}
               humanColor={humanColorProp}
               selected={selected[0][1]}
-              possibleMove={possibleMoves[0][1]}
+              possibleMove={activePossibleMoves[0][1]}
             />
           </Grid>
           <Grid
@@ -132,7 +176,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 2)}
               humanColor={humanColorProp}
               selected={selected[0][2]}
-              possibleMove={possibleMoves[0][2]}
+              possibleMove={activePossibleMoves[0][2]}
             />
           </Grid>
           <Grid
@@ -146,7 +190,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 3)}
               humanColor={humanColorProp}
               selected={selected[0][3]}
-              possibleMove={possibleMoves[0][3]}
+              possibleMove={activePossibleMoves[0][3]}
             />
           </Grid>
           <Grid
@@ -160,7 +204,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 4)}
               humanColor={humanColorProp}
               selected={selected[0][4]}
-              possibleMove={possibleMoves[0][4]}
+              possibleMove={activePossibleMoves[0][4]}
             />
           </Grid>
           <Grid
@@ -174,7 +218,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 5)}
               humanColor={humanColorProp}
               selected={selected[0][5]}
-              possibleMove={possibleMoves[0][5]}
+              possibleMove={activePossibleMoves[0][5]}
             />
           </Grid>
           <Grid
@@ -188,7 +232,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 6)}
               humanColor={humanColorProp}
               selected={selected[0][6]}
-              possibleMove={possibleMoves[0][6]}
+              possibleMove={activePossibleMoves[0][6]}
             />
           </Grid>
           <Grid
@@ -202,7 +246,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 0, 7)}
               humanColor={humanColorProp}
               selected={selected[0][7]}
-              possibleMove={possibleMoves[0][7]}
+              possibleMove={activePossibleMoves[0][7]}
             />
           </Grid>
         </Grid>
@@ -218,7 +262,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 0)}
               humanColor={humanColorProp}
               selected={selected[1][0]}
-              possibleMove={possibleMoves[1][0]}
+              possibleMove={activePossibleMoves[1][0]}
             />
           </Grid>
           <Grid
@@ -232,7 +276,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 1)}
               humanColor={humanColorProp}
               selected={selected[1][1]}
-              possibleMove={possibleMoves[1][1]}
+              possibleMove={activePossibleMoves[1][1]}
             />
           </Grid>
           <Grid
@@ -246,7 +290,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 2)}
               humanColor={humanColorProp}
               selected={selected[1][2]}
-              possibleMove={possibleMoves[1][2]}
+              possibleMove={activePossibleMoves[1][2]}
             />
           </Grid>
           <Grid
@@ -260,7 +304,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 3)}
               humanColor={humanColorProp}
               selected={selected[1][3]}
-              possibleMove={possibleMoves[1][3]}
+              possibleMove={activePossibleMoves[1][3]}
             />
           </Grid>
           <Grid
@@ -274,7 +318,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 4)}
               humanColor={humanColorProp}
               selected={selected[1][4]}
-              possibleMove={possibleMoves[1][4]}
+              possibleMove={activePossibleMoves[1][4]}
             />
           </Grid>
           <Grid
@@ -288,7 +332,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 5)}
               humanColor={humanColorProp}
               selected={selected[1][5]}
-              possibleMove={possibleMoves[1][5]}
+              possibleMove={activePossibleMoves[1][5]}
             />
           </Grid>
           <Grid
@@ -302,7 +346,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 6)}
               humanColor={humanColorProp}
               selected={selected[1][6]}
-              possibleMove={possibleMoves[1][6]}
+              possibleMove={activePossibleMoves[1][6]}
             />
           </Grid>
           <Grid
@@ -316,7 +360,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 1, 7)}
               humanColor={humanColorProp}
               selected={selected[1][7]}
-              possibleMove={possibleMoves[1][7]}
+              possibleMove={activePossibleMoves[1][7]}
             />
           </Grid>
         </Grid>
@@ -332,7 +376,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 0)}
               humanColor={humanColorProp}
               selected={selected[2][0]}
-              possibleMove={possibleMoves[2][0]}
+              possibleMove={activePossibleMoves[2][0]}
             />
           </Grid>
           <Grid
@@ -346,7 +390,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 1)}
               humanColor={humanColorProp}
               selected={selected[2][1]}
-              possibleMove={possibleMoves[2][1]}
+              possibleMove={activePossibleMoves[2][1]}
             />
           </Grid>
           <Grid
@@ -360,7 +404,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 2)}
               humanColor={humanColorProp}
               selected={selected[2][2]}
-              possibleMove={possibleMoves[2][2]}
+              possibleMove={activePossibleMoves[2][2]}
             />
           </Grid>
           <Grid
@@ -374,7 +418,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 3)}
               humanColor={humanColorProp}
               selected={selected[2][3]}
-              possibleMove={possibleMoves[2][3]}
+              possibleMove={activePossibleMoves[2][3]}
             />
           </Grid>
           <Grid
@@ -388,7 +432,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 4)}
               humanColor={humanColorProp}
               selected={selected[2][4]}
-              possibleMove={possibleMoves[2][4]}
+              possibleMove={activePossibleMoves[2][4]}
             />
           </Grid>
           <Grid
@@ -402,7 +446,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 5)}
               humanColor={humanColorProp}
               selected={selected[2][5]}
-              possibleMove={possibleMoves[2][5]}
+              possibleMove={activePossibleMoves[2][5]}
             />
           </Grid>
           <Grid
@@ -416,7 +460,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 6)}
               humanColor={humanColorProp}
               selected={selected[2][6]}
-              possibleMove={possibleMoves[2][6]}
+              possibleMove={activePossibleMoves[2][6]}
             />
           </Grid>
           <Grid
@@ -430,7 +474,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 2, 7)}
               humanColor={humanColorProp}
               selected={selected[2][7]}
-              possibleMove={possibleMoves[2][7]}
+              possibleMove={activePossibleMoves[2][7]}
             />
           </Grid>
         </Grid>
@@ -446,7 +490,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 0)}
               humanColor={humanColorProp}
               selected={selected[3][0]}
-              possibleMove={possibleMoves[3][0]}
+              possibleMove={activePossibleMoves[3][0]}
             />
           </Grid>
           <Grid
@@ -460,7 +504,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 1)}
               humanColor={humanColorProp}
               selected={selected[3][1]}
-              possibleMove={possibleMoves[3][1]}
+              possibleMove={activePossibleMoves[3][1]}
             />
           </Grid>
           <Grid
@@ -474,7 +518,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 2)}
               humanColor={humanColorProp}
               selected={selected[3][2]}
-              possibleMove={possibleMoves[3][2]}
+              possibleMove={activePossibleMoves[3][2]}
             />
           </Grid>
           <Grid
@@ -488,7 +532,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 3)}
               humanColor={humanColorProp}
               selected={selected[3][3]}
-              possibleMove={possibleMoves[3][3]}
+              possibleMove={activePossibleMoves[3][3]}
             />
           </Grid>
           <Grid
@@ -502,7 +546,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 4)}
               humanColor={humanColorProp}
               selected={selected[3][4]}
-              possibleMove={possibleMoves[3][4]}
+              possibleMove={activePossibleMoves[3][4]}
             />
           </Grid>
           <Grid
@@ -516,7 +560,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 5)}
               humanColor={humanColorProp}
               selected={selected[3][5]}
-              possibleMove={possibleMoves[3][5]}
+              possibleMove={activePossibleMoves[3][5]}
             />
           </Grid>
           <Grid
@@ -530,7 +574,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 6)}
               humanColor={humanColorProp}
               selected={selected[3][6]}
-              possibleMove={possibleMoves[3][6]}
+              possibleMove={activePossibleMoves[3][6]}
             />
           </Grid>
           <Grid
@@ -544,7 +588,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 3, 7)}
               humanColor={humanColorProp}
               selected={selected[3][7]}
-              possibleMove={possibleMoves[3][7]}
+              possibleMove={activePossibleMoves[3][7]}
             />
           </Grid>
         </Grid>
@@ -560,7 +604,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 0)}
               humanColor={humanColorProp}
               selected={selected[4][0]}
-              possibleMove={possibleMoves[4][0]}
+              possibleMove={activePossibleMoves[4][0]}
             />
           </Grid>
           <Grid
@@ -574,7 +618,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 1)}
               humanColor={humanColorProp}
               selected={selected[4][1]}
-              possibleMove={possibleMoves[4][1]}
+              possibleMove={activePossibleMoves[4][1]}
             />
           </Grid>
           <Grid
@@ -588,7 +632,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 2)}
               humanColor={humanColorProp}
               selected={selected[4][2]}
-              possibleMove={possibleMoves[4][2]}
+              possibleMove={activePossibleMoves[4][2]}
             />
           </Grid>
           <Grid
@@ -602,7 +646,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 3)}
               humanColor={humanColorProp}
               selected={selected[4][3]}
-              possibleMove={possibleMoves[4][3]}
+              possibleMove={activePossibleMoves[4][3]}
             />
           </Grid>
           <Grid
@@ -616,7 +660,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 4)}
               humanColor={humanColorProp}
               selected={selected[4][4]}
-              possibleMove={possibleMoves[4][4]}
+              possibleMove={activePossibleMoves[4][4]}
             />
           </Grid>
           <Grid
@@ -630,7 +674,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 5)}
               humanColor={humanColorProp}
               selected={selected[4][5]}
-              possibleMove={possibleMoves[4][5]}
+              possibleMove={activePossibleMoves[4][5]}
             />
           </Grid>
           <Grid
@@ -644,7 +688,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 6)}
               humanColor={humanColorProp}
               selected={selected[4][6]}
-              possibleMove={possibleMoves[4][6]}
+              possibleMove={activePossibleMoves[4][6]}
             />
           </Grid>
           <Grid
@@ -658,7 +702,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 4, 7)}
               humanColor={humanColorProp}
               selected={selected[4][7]}
-              possibleMove={possibleMoves[4][7]}
+              possibleMove={activePossibleMoves[4][7]}
             />
           </Grid>
         </Grid>
@@ -674,7 +718,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 0)}
               humanColor={humanColorProp}
               selected={selected[5][0]}
-              possibleMove={possibleMoves[5][0]}
+              possibleMove={activePossibleMoves[5][0]}
             />
           </Grid>
           <Grid
@@ -688,7 +732,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 1)}
               humanColor={humanColorProp}
               selected={selected[5][1]}
-              possibleMove={possibleMoves[5][1]}
+              possibleMove={activePossibleMoves[5][1]}
             />
           </Grid>
           <Grid
@@ -702,7 +746,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 2)}
               humanColor={humanColorProp}
               selected={selected[5][2]}
-              possibleMove={possibleMoves[5][2]}
+              possibleMove={activePossibleMoves[5][2]}
             />
           </Grid>
           <Grid
@@ -716,7 +760,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 3)}
               humanColor={humanColorProp}
               selected={selected[5][3]}
-              possibleMove={possibleMoves[5][3]}
+              possibleMove={activePossibleMoves[5][3]}
             />
           </Grid>
           <Grid
@@ -730,7 +774,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 4)}
               humanColor={humanColorProp}
               selected={selected[5][4]}
-              possibleMove={possibleMoves[5][4]}
+              possibleMove={activePossibleMoves[5][4]}
             />
           </Grid>
           <Grid
@@ -744,7 +788,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 5)}
               humanColor={humanColorProp}
               selected={selected[5][5]}
-              possibleMove={possibleMoves[5][5]}
+              possibleMove={activePossibleMoves[5][5]}
             />
           </Grid>
           <Grid
@@ -758,7 +802,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 6)}
               humanColor={humanColorProp}
               selected={selected[5][6]}
-              possibleMove={possibleMoves[5][6]}
+              possibleMove={activePossibleMoves[5][6]}
             />
           </Grid>
           <Grid
@@ -772,7 +816,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 5, 7)}
               humanColor={humanColorProp}
               selected={selected[5][7]}
-              possibleMove={possibleMoves[5][7]}
+              possibleMove={activePossibleMoves[5][7]}
             />
           </Grid>
         </Grid>
@@ -788,7 +832,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 0)}
               humanColor={humanColorProp}
               selected={selected[6][0]}
-              possibleMove={possibleMoves[6][0]}
+              possibleMove={activePossibleMoves[6][0]}
             />
           </Grid>
           <Grid
@@ -802,7 +846,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 1)}
               humanColor={humanColorProp}
               selected={selected[6][1]}
-              possibleMove={possibleMoves[6][1]}
+              possibleMove={activePossibleMoves[6][1]}
             />
           </Grid>
           <Grid
@@ -816,7 +860,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 2)}
               humanColor={humanColorProp}
               selected={selected[6][2]}
-              possibleMove={possibleMoves[6][2]}
+              possibleMove={activePossibleMoves[6][2]}
             />
           </Grid>
           <Grid
@@ -830,7 +874,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 3)}
               humanColor={humanColorProp}
               selected={selected[6][3]}
-              possibleMove={possibleMoves[6][3]}
+              possibleMove={activePossibleMoves[6][3]}
             />
           </Grid>
           <Grid
@@ -844,7 +888,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 4)}
               humanColor={humanColorProp}
               selected={selected[6][4]}
-              possibleMove={possibleMoves[6][4]}
+              possibleMove={activePossibleMoves[6][4]}
             />
           </Grid>
           <Grid
@@ -858,7 +902,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 5)}
               humanColor={humanColorProp}
               selected={selected[6][5]}
-              possibleMove={possibleMoves[6][5]}
+              possibleMove={activePossibleMoves[6][5]}
             />
           </Grid>
           <Grid
@@ -872,7 +916,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 6)}
               humanColor={humanColorProp}
               selected={selected[6][6]}
-              possibleMove={possibleMoves[6][6]}
+              possibleMove={activePossibleMoves[6][6]}
             />
           </Grid>
           <Grid
@@ -886,7 +930,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 6, 7)}
               humanColor={humanColorProp}
               selected={selected[6][7]}
-              possibleMove={possibleMoves[6][7]}
+              possibleMove={activePossibleMoves[6][7]}
             />
           </Grid>
         </Grid>
@@ -902,7 +946,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 0)}
               humanColor={humanColorProp}
               selected={selected[7][0]}
-              possibleMove={possibleMoves[7][0]}
+              possibleMove={activePossibleMoves[7][0]}
             />
           </Grid>
           <Grid
@@ -916,7 +960,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 1)}
               humanColor={humanColorProp}
               selected={selected[7][1]}
-              possibleMove={possibleMoves[7][1]}
+              possibleMove={activePossibleMoves[7][1]}
             />
           </Grid>
           <Grid
@@ -930,7 +974,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 2)}
               humanColor={humanColorProp}
               selected={selected[7][2]}
-              possibleMove={possibleMoves[7][2]}
+              possibleMove={activePossibleMoves[7][2]}
             />
           </Grid>
           <Grid
@@ -944,7 +988,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 3)}
               humanColor={humanColorProp}
               selected={selected[7][3]}
-              possibleMove={possibleMoves[7][3]}
+              possibleMove={activePossibleMoves[7][3]}
             />
           </Grid>
           <Grid
@@ -958,7 +1002,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 4)}
               humanColor={humanColorProp}
               selected={selected[7][4]}
-              possibleMove={possibleMoves[7][4]}
+              possibleMove={activePossibleMoves[7][4]}
             />
           </Grid>
           <Grid
@@ -972,7 +1016,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 5)}
               humanColor={humanColorProp}
               selected={selected[7][5]}
-              possibleMove={possibleMoves[7][5]}
+              possibleMove={activePossibleMoves[7][5]}
             />
           </Grid>
           <Grid
@@ -986,7 +1030,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 6)}
               humanColor={humanColorProp}
               selected={selected[7][6]}
-              possibleMove={possibleMoves[7][6]}
+              possibleMove={activePossibleMoves[7][6]}
             />
           </Grid>
           <Grid
@@ -1000,7 +1044,7 @@ const GameBoard = (props: GameBoardProps) => {
               piece={findWhatPieceIsOnASquare(pieceLocations, 7, 7)}
               humanColor={humanColorProp}
               selected={selected[7][7]}
-              possibleMove={possibleMoves[7][7]}
+              possibleMove={activePossibleMoves[7][7]}
             />
           </Grid>
         </Grid>

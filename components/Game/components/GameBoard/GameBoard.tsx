@@ -121,7 +121,6 @@ const GameBoard = (props: GameBoardProps) => {
         doTurnData.doTurn.pieceLocations !==
           dataFromServerAfterMove.pieceLocations)
     ) {
-      console.log(JSON.stringify(doTurnData.doTurn.possibleMoves));
       setDataFromServerAfterMove({
         possibleMoves: doTurnData.doTurn.possibleMoves,
         pieceLocations: doTurnData.doTurn.pieceLocations,

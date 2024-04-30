@@ -4,7 +4,7 @@ import {
   PieceLocations,
   Piece,
 } from "../../../../types";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import findWhatPieceIsOnASquare from "../../../../utils/findWhatPieceIsOnASquare";
 import GamePiece from "./components/GamePiece";
@@ -134,984 +134,986 @@ const GameBoard = (props: GameBoardProps) => {
 
   return (
     <>
-      <Grid container>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 0)}
-              humanColor={humanColorProp}
-              selected={selected[0][0]}
-              possibleMove={activePossibleMoves[0][0]}
-            />
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Grid container>
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 0)}
+                humanColor={humanColorProp}
+                selected={selected[0][0]}
+                possibleMove={activePossibleMoves[0][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 1)}
+                humanColor={humanColorProp}
+                selected={selected[0][1]}
+                possibleMove={activePossibleMoves[0][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 2)}
+                humanColor={humanColorProp}
+                selected={selected[0][2]}
+                possibleMove={activePossibleMoves[0][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 3)}
+                humanColor={humanColorProp}
+                selected={selected[0][3]}
+                possibleMove={activePossibleMoves[0][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 4)}
+                humanColor={humanColorProp}
+                selected={selected[0][4]}
+                possibleMove={activePossibleMoves[0][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 5)}
+                humanColor={humanColorProp}
+                selected={selected[0][5]}
+                possibleMove={activePossibleMoves[0][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 6)}
+                humanColor={humanColorProp}
+                selected={selected[0][6]}
+                possibleMove={activePossibleMoves[0][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(0, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 0, 7)}
+                humanColor={humanColorProp}
+                selected={selected[0][7]}
+                possibleMove={activePossibleMoves[0][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 1)}
-              humanColor={humanColorProp}
-              selected={selected[0][1]}
-              possibleMove={activePossibleMoves[0][1]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 0)}
+                humanColor={humanColorProp}
+                selected={selected[1][0]}
+                possibleMove={activePossibleMoves[1][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 1)}
+                humanColor={humanColorProp}
+                selected={selected[1][1]}
+                possibleMove={activePossibleMoves[1][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 2)}
+                humanColor={humanColorProp}
+                selected={selected[1][2]}
+                possibleMove={activePossibleMoves[1][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 3)}
+                humanColor={humanColorProp}
+                selected={selected[1][3]}
+                possibleMove={activePossibleMoves[1][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 4)}
+                humanColor={humanColorProp}
+                selected={selected[1][4]}
+                possibleMove={activePossibleMoves[1][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 5)}
+                humanColor={humanColorProp}
+                selected={selected[1][5]}
+                possibleMove={activePossibleMoves[1][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 6)}
+                humanColor={humanColorProp}
+                selected={selected[1][6]}
+                possibleMove={activePossibleMoves[1][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(1, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 1, 7)}
+                humanColor={humanColorProp}
+                selected={selected[1][7]}
+                possibleMove={activePossibleMoves[1][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 2)}
-              humanColor={humanColorProp}
-              selected={selected[0][2]}
-              possibleMove={activePossibleMoves[0][2]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 0)}
+                humanColor={humanColorProp}
+                selected={selected[2][0]}
+                possibleMove={activePossibleMoves[2][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 1)}
+                humanColor={humanColorProp}
+                selected={selected[2][1]}
+                possibleMove={activePossibleMoves[2][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 2)}
+                humanColor={humanColorProp}
+                selected={selected[2][2]}
+                possibleMove={activePossibleMoves[2][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 3)}
+                humanColor={humanColorProp}
+                selected={selected[2][3]}
+                possibleMove={activePossibleMoves[2][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 4)}
+                humanColor={humanColorProp}
+                selected={selected[2][4]}
+                possibleMove={activePossibleMoves[2][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 5)}
+                humanColor={humanColorProp}
+                selected={selected[2][5]}
+                possibleMove={activePossibleMoves[2][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 6)}
+                humanColor={humanColorProp}
+                selected={selected[2][6]}
+                possibleMove={activePossibleMoves[2][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(2, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 2, 7)}
+                humanColor={humanColorProp}
+                selected={selected[2][7]}
+                possibleMove={activePossibleMoves[2][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 3)}
-              humanColor={humanColorProp}
-              selected={selected[0][3]}
-              possibleMove={activePossibleMoves[0][3]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 0)}
+                humanColor={humanColorProp}
+                selected={selected[3][0]}
+                possibleMove={activePossibleMoves[3][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 1)}
+                humanColor={humanColorProp}
+                selected={selected[3][1]}
+                possibleMove={activePossibleMoves[3][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 2)}
+                humanColor={humanColorProp}
+                selected={selected[3][2]}
+                possibleMove={activePossibleMoves[3][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 3)}
+                humanColor={humanColorProp}
+                selected={selected[3][3]}
+                possibleMove={activePossibleMoves[3][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 4)}
+                humanColor={humanColorProp}
+                selected={selected[3][4]}
+                possibleMove={activePossibleMoves[3][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 5)}
+                humanColor={humanColorProp}
+                selected={selected[3][5]}
+                possibleMove={activePossibleMoves[3][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 6)}
+                humanColor={humanColorProp}
+                selected={selected[3][6]}
+                possibleMove={activePossibleMoves[3][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(3, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 3, 7)}
+                humanColor={humanColorProp}
+                selected={selected[3][7]}
+                possibleMove={activePossibleMoves[3][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 4)}
-              humanColor={humanColorProp}
-              selected={selected[0][4]}
-              possibleMove={activePossibleMoves[0][4]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 0)}
+                humanColor={humanColorProp}
+                selected={selected[4][0]}
+                possibleMove={activePossibleMoves[4][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 1)}
+                humanColor={humanColorProp}
+                selected={selected[4][1]}
+                possibleMove={activePossibleMoves[4][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 2)}
+                humanColor={humanColorProp}
+                selected={selected[4][2]}
+                possibleMove={activePossibleMoves[4][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 3)}
+                humanColor={humanColorProp}
+                selected={selected[4][3]}
+                possibleMove={activePossibleMoves[4][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 4)}
+                humanColor={humanColorProp}
+                selected={selected[4][4]}
+                possibleMove={activePossibleMoves[4][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 5)}
+                humanColor={humanColorProp}
+                selected={selected[4][5]}
+                possibleMove={activePossibleMoves[4][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 6)}
+                humanColor={humanColorProp}
+                selected={selected[4][6]}
+                possibleMove={activePossibleMoves[4][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(4, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 4, 7)}
+                humanColor={humanColorProp}
+                selected={selected[4][7]}
+                possibleMove={activePossibleMoves[4][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 5)}
-              humanColor={humanColorProp}
-              selected={selected[0][5]}
-              possibleMove={activePossibleMoves[0][5]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 0)}
+                humanColor={humanColorProp}
+                selected={selected[5][0]}
+                possibleMove={activePossibleMoves[5][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 1)}
+                humanColor={humanColorProp}
+                selected={selected[5][1]}
+                possibleMove={activePossibleMoves[5][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 2)}
+                humanColor={humanColorProp}
+                selected={selected[5][2]}
+                possibleMove={activePossibleMoves[5][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 3)}
+                humanColor={humanColorProp}
+                selected={selected[5][3]}
+                possibleMove={activePossibleMoves[5][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 4)}
+                humanColor={humanColorProp}
+                selected={selected[5][4]}
+                possibleMove={activePossibleMoves[5][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 5)}
+                humanColor={humanColorProp}
+                selected={selected[5][5]}
+                possibleMove={activePossibleMoves[5][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 6)}
+                humanColor={humanColorProp}
+                selected={selected[5][6]}
+                possibleMove={activePossibleMoves[5][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(5, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 5, 7)}
+                humanColor={humanColorProp}
+                selected={selected[5][7]}
+                possibleMove={activePossibleMoves[5][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 6)}
-              humanColor={humanColorProp}
-              selected={selected[0][6]}
-              possibleMove={activePossibleMoves[0][6]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 0)}
+                humanColor={humanColorProp}
+                selected={selected[6][0]}
+                possibleMove={activePossibleMoves[6][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 1)}
+                humanColor={humanColorProp}
+                selected={selected[6][1]}
+                possibleMove={activePossibleMoves[6][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 2)}
+                humanColor={humanColorProp}
+                selected={selected[6][2]}
+                possibleMove={activePossibleMoves[6][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 3)}
+                humanColor={humanColorProp}
+                selected={selected[6][3]}
+                possibleMove={activePossibleMoves[6][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 4)}
+                humanColor={humanColorProp}
+                selected={selected[6][4]}
+                possibleMove={activePossibleMoves[6][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 5)}
+                humanColor={humanColorProp}
+                selected={selected[6][5]}
+                possibleMove={activePossibleMoves[6][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 6)}
+                humanColor={humanColorProp}
+                selected={selected[6][6]}
+                possibleMove={activePossibleMoves[6][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(6, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 6, 7)}
+                humanColor={humanColorProp}
+                selected={selected[6][7]}
+                possibleMove={activePossibleMoves[6][7]}
+              />
+            </Grid>
           </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(0, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 0, 7)}
-              humanColor={humanColorProp}
-              selected={selected[0][7]}
-              possibleMove={activePossibleMoves[0][7]}
-            />
+          <Grid container padding={0.25} margin={0}>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 0);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 0)}
+                humanColor={humanColorProp}
+                selected={selected[7][0]}
+                possibleMove={activePossibleMoves[7][0]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 1);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 1)}
+                humanColor={humanColorProp}
+                selected={selected[7][1]}
+                possibleMove={activePossibleMoves[7][1]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 2);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 2)}
+                humanColor={humanColorProp}
+                selected={selected[7][2]}
+                possibleMove={activePossibleMoves[7][2]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 3);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 3)}
+                humanColor={humanColorProp}
+                selected={selected[7][3]}
+                possibleMove={activePossibleMoves[7][3]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 4);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 4)}
+                humanColor={humanColorProp}
+                selected={selected[7][4]}
+                possibleMove={activePossibleMoves[7][4]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 5);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 5)}
+                humanColor={humanColorProp}
+                selected={selected[7][5]}
+                possibleMove={activePossibleMoves[7][5]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 6);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 6)}
+                humanColor={humanColorProp}
+                selected={selected[7][6]}
+                possibleMove={activePossibleMoves[7][6]}
+              />
+            </Grid>
+            <Grid
+              item
+              padding={0.25}
+              margin={0}
+              onClick={() => {
+                handleClickSpot(7, 7);
+              }}
+            >
+              <GamePiece
+                piece={findWhatPieceIsOnASquare(pieceLocations, 7, 7)}
+                humanColor={humanColorProp}
+                selected={selected[7][7]}
+                possibleMove={activePossibleMoves[7][7]}
+              />
+            </Grid>
           </Grid>
         </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 0)}
-              humanColor={humanColorProp}
-              selected={selected[1][0]}
-              possibleMove={activePossibleMoves[1][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 1)}
-              humanColor={humanColorProp}
-              selected={selected[1][1]}
-              possibleMove={activePossibleMoves[1][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 2)}
-              humanColor={humanColorProp}
-              selected={selected[1][2]}
-              possibleMove={activePossibleMoves[1][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 3)}
-              humanColor={humanColorProp}
-              selected={selected[1][3]}
-              possibleMove={activePossibleMoves[1][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 4)}
-              humanColor={humanColorProp}
-              selected={selected[1][4]}
-              possibleMove={activePossibleMoves[1][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 5)}
-              humanColor={humanColorProp}
-              selected={selected[1][5]}
-              possibleMove={activePossibleMoves[1][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 6)}
-              humanColor={humanColorProp}
-              selected={selected[1][6]}
-              possibleMove={activePossibleMoves[1][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(1, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 1, 7)}
-              humanColor={humanColorProp}
-              selected={selected[1][7]}
-              possibleMove={activePossibleMoves[1][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 0)}
-              humanColor={humanColorProp}
-              selected={selected[2][0]}
-              possibleMove={activePossibleMoves[2][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 1)}
-              humanColor={humanColorProp}
-              selected={selected[2][1]}
-              possibleMove={activePossibleMoves[2][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 2)}
-              humanColor={humanColorProp}
-              selected={selected[2][2]}
-              possibleMove={activePossibleMoves[2][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 3)}
-              humanColor={humanColorProp}
-              selected={selected[2][3]}
-              possibleMove={activePossibleMoves[2][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 4)}
-              humanColor={humanColorProp}
-              selected={selected[2][4]}
-              possibleMove={activePossibleMoves[2][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 5)}
-              humanColor={humanColorProp}
-              selected={selected[2][5]}
-              possibleMove={activePossibleMoves[2][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 6)}
-              humanColor={humanColorProp}
-              selected={selected[2][6]}
-              possibleMove={activePossibleMoves[2][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(2, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 2, 7)}
-              humanColor={humanColorProp}
-              selected={selected[2][7]}
-              possibleMove={activePossibleMoves[2][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 0)}
-              humanColor={humanColorProp}
-              selected={selected[3][0]}
-              possibleMove={activePossibleMoves[3][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 1)}
-              humanColor={humanColorProp}
-              selected={selected[3][1]}
-              possibleMove={activePossibleMoves[3][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 2)}
-              humanColor={humanColorProp}
-              selected={selected[3][2]}
-              possibleMove={activePossibleMoves[3][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 3)}
-              humanColor={humanColorProp}
-              selected={selected[3][3]}
-              possibleMove={activePossibleMoves[3][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 4)}
-              humanColor={humanColorProp}
-              selected={selected[3][4]}
-              possibleMove={activePossibleMoves[3][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 5)}
-              humanColor={humanColorProp}
-              selected={selected[3][5]}
-              possibleMove={activePossibleMoves[3][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 6)}
-              humanColor={humanColorProp}
-              selected={selected[3][6]}
-              possibleMove={activePossibleMoves[3][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(3, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 3, 7)}
-              humanColor={humanColorProp}
-              selected={selected[3][7]}
-              possibleMove={activePossibleMoves[3][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 0)}
-              humanColor={humanColorProp}
-              selected={selected[4][0]}
-              possibleMove={activePossibleMoves[4][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 1)}
-              humanColor={humanColorProp}
-              selected={selected[4][1]}
-              possibleMove={activePossibleMoves[4][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 2)}
-              humanColor={humanColorProp}
-              selected={selected[4][2]}
-              possibleMove={activePossibleMoves[4][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 3)}
-              humanColor={humanColorProp}
-              selected={selected[4][3]}
-              possibleMove={activePossibleMoves[4][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 4)}
-              humanColor={humanColorProp}
-              selected={selected[4][4]}
-              possibleMove={activePossibleMoves[4][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 5)}
-              humanColor={humanColorProp}
-              selected={selected[4][5]}
-              possibleMove={activePossibleMoves[4][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 6)}
-              humanColor={humanColorProp}
-              selected={selected[4][6]}
-              possibleMove={activePossibleMoves[4][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(4, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 4, 7)}
-              humanColor={humanColorProp}
-              selected={selected[4][7]}
-              possibleMove={activePossibleMoves[4][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 0)}
-              humanColor={humanColorProp}
-              selected={selected[5][0]}
-              possibleMove={activePossibleMoves[5][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 1)}
-              humanColor={humanColorProp}
-              selected={selected[5][1]}
-              possibleMove={activePossibleMoves[5][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 2)}
-              humanColor={humanColorProp}
-              selected={selected[5][2]}
-              possibleMove={activePossibleMoves[5][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 3)}
-              humanColor={humanColorProp}
-              selected={selected[5][3]}
-              possibleMove={activePossibleMoves[5][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 4)}
-              humanColor={humanColorProp}
-              selected={selected[5][4]}
-              possibleMove={activePossibleMoves[5][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 5)}
-              humanColor={humanColorProp}
-              selected={selected[5][5]}
-              possibleMove={activePossibleMoves[5][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 6)}
-              humanColor={humanColorProp}
-              selected={selected[5][6]}
-              possibleMove={activePossibleMoves[5][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(5, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 5, 7)}
-              humanColor={humanColorProp}
-              selected={selected[5][7]}
-              possibleMove={activePossibleMoves[5][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 0)}
-              humanColor={humanColorProp}
-              selected={selected[6][0]}
-              possibleMove={activePossibleMoves[6][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 1)}
-              humanColor={humanColorProp}
-              selected={selected[6][1]}
-              possibleMove={activePossibleMoves[6][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 2)}
-              humanColor={humanColorProp}
-              selected={selected[6][2]}
-              possibleMove={activePossibleMoves[6][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 3)}
-              humanColor={humanColorProp}
-              selected={selected[6][3]}
-              possibleMove={activePossibleMoves[6][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 4)}
-              humanColor={humanColorProp}
-              selected={selected[6][4]}
-              possibleMove={activePossibleMoves[6][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 5)}
-              humanColor={humanColorProp}
-              selected={selected[6][5]}
-              possibleMove={activePossibleMoves[6][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 6)}
-              humanColor={humanColorProp}
-              selected={selected[6][6]}
-              possibleMove={activePossibleMoves[6][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(6, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 6, 7)}
-              humanColor={humanColorProp}
-              selected={selected[6][7]}
-              possibleMove={activePossibleMoves[6][7]}
-            />
-          </Grid>
-        </Grid>
-        <Grid container padding={0.25} margin={0}>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 0);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 0)}
-              humanColor={humanColorProp}
-              selected={selected[7][0]}
-              possibleMove={activePossibleMoves[7][0]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 1);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 1)}
-              humanColor={humanColorProp}
-              selected={selected[7][1]}
-              possibleMove={activePossibleMoves[7][1]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 2);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 2)}
-              humanColor={humanColorProp}
-              selected={selected[7][2]}
-              possibleMove={activePossibleMoves[7][2]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 3);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 3)}
-              humanColor={humanColorProp}
-              selected={selected[7][3]}
-              possibleMove={activePossibleMoves[7][3]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 4);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 4)}
-              humanColor={humanColorProp}
-              selected={selected[7][4]}
-              possibleMove={activePossibleMoves[7][4]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 5);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 5)}
-              humanColor={humanColorProp}
-              selected={selected[7][5]}
-              possibleMove={activePossibleMoves[7][5]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 6);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 6)}
-              humanColor={humanColorProp}
-              selected={selected[7][6]}
-              possibleMove={activePossibleMoves[7][6]}
-            />
-          </Grid>
-          <Grid
-            item
-            padding={0.25}
-            margin={0}
-            onClick={() => {
-              handleClickSpot(7, 7);
-            }}
-          >
-            <GamePiece
-              piece={findWhatPieceIsOnASquare(pieceLocations, 7, 7)}
-              humanColor={humanColorProp}
-              selected={selected[7][7]}
-              possibleMove={activePossibleMoves[7][7]}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+      </Box>
     </>
   );
 };

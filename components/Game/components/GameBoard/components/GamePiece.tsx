@@ -27,10 +27,10 @@ const GamePiece = (props: GamePieceProps) => {
       alignItems="center"
       sx={{
         m: 0.5,
-        height: "75px",
-        border: (isHumanPiece(piece) && selected) || possibleMove ? 6 : 2,
+        height: "50px",
+        border: (isHumanPiece(piece) && selected) || possibleMove ? 8 : 4,
         borderColor: possibleMove ? "purple" : "red",
-        width: "75px",
+        width: "50px",
       }}
     >
       <Typography

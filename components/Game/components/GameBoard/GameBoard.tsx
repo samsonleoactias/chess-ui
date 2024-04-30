@@ -134,11 +134,12 @@ const GameBoard = (props: GameBoardProps) => {
 
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid container spacing={1}>
+      <Grid container>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 0);
             }}
@@ -152,7 +153,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 1);
             }}
@@ -166,7 +168,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 2);
             }}
@@ -180,7 +183,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 3);
             }}
@@ -194,7 +198,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 4);
             }}
@@ -208,7 +213,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 5);
             }}
@@ -222,7 +228,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 6);
             }}
@@ -236,7 +243,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(0, 7);
             }}
@@ -249,10 +257,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 0);
             }}
@@ -266,7 +275,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 1);
             }}
@@ -280,7 +290,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 2);
             }}
@@ -294,7 +305,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 3);
             }}
@@ -308,7 +320,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 4);
             }}
@@ -322,7 +335,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 5);
             }}
@@ -336,7 +350,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 6);
             }}
@@ -350,7 +365,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(1, 7);
             }}
@@ -363,10 +379,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 0);
             }}
@@ -380,7 +397,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 1);
             }}
@@ -394,7 +412,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 2);
             }}
@@ -408,7 +427,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 3);
             }}
@@ -422,7 +442,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 4);
             }}
@@ -436,7 +457,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 5);
             }}
@@ -450,7 +472,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 6);
             }}
@@ -464,7 +487,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(2, 7);
             }}
@@ -477,10 +501,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 0);
             }}
@@ -494,7 +519,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 1);
             }}
@@ -508,7 +534,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 2);
             }}
@@ -522,7 +549,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 3);
             }}
@@ -536,7 +564,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 4);
             }}
@@ -550,7 +579,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 5);
             }}
@@ -564,7 +594,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 6);
             }}
@@ -578,7 +609,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(3, 7);
             }}
@@ -591,10 +623,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 0);
             }}
@@ -608,7 +641,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 1);
             }}
@@ -622,7 +656,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 2);
             }}
@@ -636,7 +671,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 3);
             }}
@@ -650,7 +686,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 4);
             }}
@@ -664,7 +701,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 5);
             }}
@@ -678,7 +716,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 6);
             }}
@@ -692,7 +731,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(4, 7);
             }}
@@ -705,10 +745,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 0);
             }}
@@ -722,7 +763,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 1);
             }}
@@ -736,7 +778,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 2);
             }}
@@ -750,7 +793,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 3);
             }}
@@ -764,7 +808,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 4);
             }}
@@ -778,7 +823,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 5);
             }}
@@ -792,7 +838,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 6);
             }}
@@ -806,7 +853,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(5, 7);
             }}
@@ -819,10 +867,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 0);
             }}
@@ -836,7 +885,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 1);
             }}
@@ -850,7 +900,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 2);
             }}
@@ -864,7 +915,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 3);
             }}
@@ -878,7 +930,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 4);
             }}
@@ -892,7 +945,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 5);
             }}
@@ -906,7 +960,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 6);
             }}
@@ -920,7 +975,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(6, 7);
             }}
@@ -933,10 +989,11 @@ const GameBoard = (props: GameBoardProps) => {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={1}>
+        <Grid container padding={0.25} margin={0}>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 0);
             }}
@@ -950,7 +1007,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 1);
             }}
@@ -964,7 +1022,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 2);
             }}
@@ -978,7 +1037,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 3);
             }}
@@ -992,7 +1052,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 4);
             }}
@@ -1006,7 +1067,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 5);
             }}
@@ -1020,7 +1082,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 6);
             }}
@@ -1034,7 +1097,8 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
           <Grid
             item
-            xs={1}
+            padding={0.25}
+            margin={0}
             onClick={() => {
               handleClickSpot(7, 7);
             }}

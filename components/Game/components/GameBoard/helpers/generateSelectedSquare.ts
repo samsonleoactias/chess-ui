@@ -13,10 +13,10 @@ const generateSelectedSquare = (
     [false, false, false, false, false, false, false, false],
   ];
 
-  if (selectedRow && selectedColumn) {
+  if (selectedRow !== undefined && selectedColumn !== undefined) {
     squares[selectedRow][selectedColumn] = true;
   }
-
+  console.log(squares);
   return squares;
 };
 

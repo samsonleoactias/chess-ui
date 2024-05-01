@@ -352,6 +352,8 @@ const CREATE_GAME = gql`
 const DO_TURN = gql`
   mutation DoTurn($humanPlayerId: String!, $piece: String!, $move: String!) {
     doTurn(humanPlayerId: $humanPlayerId, piece: $piece, move: $move) {
+      humanWinner
+      aiWinner
       humanColor
       pieceLocations {
         humanPawnA {

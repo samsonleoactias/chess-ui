@@ -48,6 +48,8 @@ const GameBoard = (props: GameBoardProps) => {
     pieceLocations: PieceLocations;
   }>({ possibleMoves, pieceLocations });
   const [boardIsInteractable, setBoardIsInteractable] = useState<boolean>(true);
+  const [humanWinner, setHumanWinner] = useState<boolean>(humanWinnerProp);
+  const [aiWinner, setAiWinner] = useState<boolean>(aiWinnerProp);
 
   const [
     doTurn,
@@ -60,6 +62,8 @@ const GameBoard = (props: GameBoardProps) => {
     if (
       !doTurnLoading &&
       !doTurnError &&
+      !humanWinner &&
+      !aiWinner &&
       activePossibleMoves[row][column] === true &&
       boardIsInteractable
     ) {
@@ -107,7 +111,13 @@ const GameBoard = (props: GameBoardProps) => {
           move: JSON.stringify({ location: { row, column } }),
         },
       });
-    } else if (!doTurnLoading && !doTurnError && boardIsInteractable) {
+    } else if (
+      !doTurnLoading &&
+      !doTurnError &&
+      !humanWinner &&
+      !aiWinner &&
+      boardIsInteractable
+    ) {
       setSelected(generateSelectedSquare(row, column));
       setActivePossibleMoves(
         generateActivePossibleMovesSquares(
@@ -125,18 +135,25 @@ const GameBoard = (props: GameBoardProps) => {
         doTurnData.doTurn.pieceLocations !==
           dataFromServerAfterMove.pieceLocations)
     ) {
-      setTimeout(() => {
-        setDataFromServerAfterMove({
-          possibleMoves: doTurnData.doTurn.possibleMoves,
-          pieceLocations: doTurnData.doTurn.pieceLocations,
-        });
+      // TODO program to declare victory with checkmate instead, will happen on backend
+      if (doTurnData.doTurn.pieceLocations.aiKing.captured) {
+        setHumanWinner(true);
+      } else if (doTurnData.doTurn.pieceLocations.humanKing.captured) {
+        setAiWinner(true);
+      } else {
+        setTimeout(() => {
+          setDataFromServerAfterMove({
+            possibleMoves: doTurnData.doTurn.possibleMoves,
+            pieceLocations: doTurnData.doTurn.pieceLocations,
+          });
 
-        setPieceLocations(doTurnData.doTurn.pieceLocations);
+          setPieceLocations(doTurnData.doTurn.pieceLocations);
 
-        setPossibleMoves(doTurnData.doTurn.possibleMoves);
+          setPossibleMoves(doTurnData.doTurn.possibleMoves);
 
-        setBoardIsInteractable(true);
-      }, 800);
+          setBoardIsInteractable(true);
+        }, 800);
+      }
     }
   });
 
@@ -149,7 +166,11 @@ const GameBoard = (props: GameBoardProps) => {
           height: "50px",
           width: "75%",
         }}
-      ></Container>
+      >
+        <Typography sx={{ color: "#ff9a3c" }}>
+          {humanWinner ? "YOU WIN! COOL!" : aiWinner ? "YOU LOSE! BUMMER!" : ""}
+        </Typography>
+      </Container>
       <Container sx={{ width: "75%" }}>
         <Grid container>
           <Grid container padding={0.25} margin={0}>

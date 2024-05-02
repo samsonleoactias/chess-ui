@@ -136,9 +136,9 @@ const GameBoard = (props: GameBoardProps) => {
           dataFromServerAfterMove.pieceLocations)
     ) {
       // TODO program to declare victory with checkmate instead, will happen on backend
-      if (doTurnData.doTurn.pieceLocations.aiKing.captured) {
+      if (doTurnData.doTurn.humanWinner) {
         setHumanWinner(true);
-      } else if (doTurnData.doTurn.pieceLocations.humanKing.captured) {
+      } else if (doTurnData.doTurn.aiWinner) {
         setAiWinner(true);
       } else {
         setTimeout(() => {

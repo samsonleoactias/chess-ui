@@ -167,7 +167,10 @@ const GameBoard = (props: GameBoardProps) => {
           width: "75%",
         }}
       >
-        <Typography sx={{ color: "#ff9a3c" }}>
+        <Typography
+          align="center"
+          sx={{ color: "#ff9a3c", p: "15px", fontWeight: "bold" }}
+        >
           {humanWinner ? "YOU WIN! COOL!" : aiWinner ? "YOU LOSE! BUMMER!" : ""}
         </Typography>
       </Container>

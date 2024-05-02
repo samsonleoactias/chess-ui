@@ -16,7 +16,7 @@ const generateSelectedSquare = (
   if (selectedRow !== undefined && selectedColumn !== undefined) {
     squares[selectedRow][selectedColumn] = true;
   }
-  console.log(squares);
+
   return squares;
 };
 

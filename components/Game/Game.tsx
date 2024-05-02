@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GameBoard from "./components/GameBoard/GameBoard";
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { useMutation, useQuery } from "@apollo/client";
 import GET_GAME from "@/graphql/queries";
 import { CREATE_GAME } from "@/graphql/mutations";
@@ -41,10 +41,24 @@ const Game = () => {
       <>
         <Button
           onClick={handleNewGame}
-          variant="outlined"
-          sx={{ margin: "10px" }}
+          sx={{
+            m: "15px",
+            mt: "25px",
+            objectPosition: "left top",
+            float: "left",
+            backgroundColor: "#ff9a3c",
+            height: "50px",
+            border: 4,
+            borderColor: "black",
+            width: "200px",
+          }}
         >
-          New Game
+          <Typography
+            align="center"
+            sx={{ color: "black", p: "15px", fontWeight: "bold" }}
+          >
+            New Game
+          </Typography>
         </Button>
         {/* {loadGameLoading ||
         loadGameError ||
@@ -79,15 +93,37 @@ const Game = () => {
 
   if (createGameData) {
     return (
-      <Container>
-        <GameBoard
-          pieceLocationsProp={createGameData.createGame.pieceLocations}
-          possibleMovesProp={createGameData.createGame.possibleMoves}
-          humanWinnerProp={createGameData.createGame.humanWinner}
-          aiWinnerProp={createGameData.createGame.aiWinner}
-          humanColorProp={createGameData.createGame.humanColor}
-        />
-      </Container>
+      <>
+        <Button
+          onClick={handleNewGame}
+          sx={{
+            m: "15px",
+            objectPosition: "left top",
+            float: "left",
+            backgroundColor: "#ff9a3c",
+            height: "50px",
+            border: 4,
+            borderColor: "black",
+            width: "200px",
+          }}
+        >
+          <Typography
+            align="center"
+            sx={{ color: "black", p: "15px", fontWeight: "bold" }}
+          >
+            New Game
+          </Typography>
+        </Button>
+        <Container>
+          <GameBoard
+            pieceLocationsProp={createGameData.createGame.pieceLocations}
+            possibleMovesProp={createGameData.createGame.possibleMoves}
+            humanWinnerProp={createGameData.createGame.humanWinner}
+            aiWinnerProp={createGameData.createGame.aiWinner}
+            humanColorProp={createGameData.createGame.humanColor}
+          />
+        </Container>
+      </>
     );
   }
 

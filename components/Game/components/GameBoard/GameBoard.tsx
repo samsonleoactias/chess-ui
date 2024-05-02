@@ -164,7 +164,7 @@ const GameBoard = (props: GameBoardProps) => {
           mt: "10px",
           backgroundColor: "black",
           height: "50px",
-          width: "75%",
+          width: "60%",
         }}
       >
         <Typography
@@ -174,10 +174,10 @@ const GameBoard = (props: GameBoardProps) => {
           {humanWinner ? "YOU WIN! COOL!" : aiWinner ? "YOU LOSE! BUMMER!" : ""}
         </Typography>
       </Container>
-      <Container sx={{ width: "75%" }}>
+      <Container sx={{ width: "60%" }}>
         <Grid container>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -309,7 +309,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -441,7 +441,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -573,7 +573,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -705,7 +705,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -837,7 +837,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -969,7 +969,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}
@@ -1101,7 +1101,7 @@ const GameBoard = (props: GameBoardProps) => {
             <Grid item xs={2}></Grid>
           </Grid>
           <Grid container padding={0.25} margin={0}>
-            <Grid item xs={2}></Grid>
+            <Grid item xs={1.5}></Grid>
             <Grid
               item
               padding={0.25}

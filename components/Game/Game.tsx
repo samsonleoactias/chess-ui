@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import GameBoard from "./components/GameBoard/GameBoard";
-import { Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useMutation, useQuery } from "@apollo/client";
 import GET_GAME from "@/graphql/queries";
 import { CREATE_GAME } from "@/graphql/mutations";
@@ -36,44 +36,27 @@ const Game = () => {
 
   if (start) {
     return (
-      <>
-        <Button
-          onClick={handleNewGame}
-          sx={{
-            m: "15px",
-            mt: "25px",
-            objectPosition: "left top",
-            float: "left",
-            backgroundColor: "#ff9a3c",
-            height: "50px",
-            border: 4,
-            borderColor: "black",
-            width: "200px",
-          }}
+      <Button
+        onClick={handleNewGame}
+        sx={{
+          m: "15px",
+          mt: "25px",
+          objectPosition: "left top",
+          float: "left",
+          backgroundColor: "#ff9a3c",
+          height: "50px",
+          border: 4,
+          borderColor: "black",
+          width: "200px",
+        }}
+      >
+        <Typography
+          align="center"
+          sx={{ color: "black", p: "15px", fontWeight: "bold" }}
         >
-          <Typography
-            align="center"
-            sx={{ color: "black", p: "15px", fontWeight: "bold" }}
-          >
-            New Game
-          </Typography>
-        </Button>
-        {/* {loadGameLoading ||
-        loadGameError ||
-        loadGameData.humanWinner ||
-        loadGameData.aiWinner ||
-        !loadGameData ? (
-          <Button
-            onClick={handleLoadGame}
-            variant="outlined"
-            sx={{ margin: "10px" }}
-          >
-            Load Game
-          </Button>
-        ) : (
-          <></>
-        )} */}
-      </>
+          New Game
+        </Typography>
+      </Button>
     );
   }
 
@@ -91,7 +74,7 @@ const Game = () => {
 
   if (createGameData) {
     return (
-      <>
+      <Box sx={{ backgroundColor: "#80423d" }}>
         <Button
           onClick={handleNewGame}
           sx={{
@@ -122,7 +105,7 @@ const Game = () => {
             humanPlayerIdProp={createGameData.createGame.humanPlayerId}
           />
         </Container>
-      </>
+      </Box>
     );
   }
 

@@ -164,7 +164,7 @@ const GameBoard = (props: GameBoardProps) => {
   ]);
 
   return (
-    <>
+    <Box sx={{ backgroundColor: "#80423d" }}>
       <Container
         sx={{
           mt: "10px",
@@ -1240,7 +1240,7 @@ const GameBoard = (props: GameBoardProps) => {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 };
 

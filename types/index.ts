@@ -5,7 +5,7 @@ import PossibleMove from "./PossibleMove";
 import PossibleMovesAssignedToPieces from "./PossibleMovesAssignedToPieces";
 import Icons from "./Icons";
 
-export { Color, Piece, Spot };
+export { Color, Piece };
 
 export type {
   PieceLocations,

@@ -1,20 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GameBoard from "./components/GameBoard/GameBoard";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useMutation, useQuery } from "@apollo/client";
 import GET_GAME from "@/graphql/queries";
-import { CREATE_GAME } from "@/graphql/mutations";
+import { AI_FIRST_MOVE, CREATE_GAME } from "@/graphql/mutations";
 
 const Game = () => {
-  const [start, setStart] = useState(true);
-
-  // const {
-  //   loading: loadGameLoading,
-  //   error: loadGameError,
-  //   data: loadGameData,
-  // } = useQuery(GET_GAME, {
-  //   variables: { humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8" },
-  // }); // TODO human player ID variable
+  const [start, setStart] = useState<boolean>(true);
+  const [useAiFirstMoveData, setUseAiFirstMoveData] = useState<boolean>(false);
 
   const [
     newGame,
@@ -25,14 +18,59 @@ const Game = () => {
     },
   ] = useMutation(CREATE_GAME);
 
+  const [
+    aiFirstMove,
+    {
+      loading: aiFirstMoveLoading,
+      error: aiFirstMoveError,
+      data: aiFirstMoveData,
+    },
+  ] = useMutation(AI_FIRST_MOVE);
+
   const handleNewGame = () => {
+    setUseAiFirstMoveData(false);
+    setStart(true);
     newGame();
-    setStart(false);
   };
 
-  const handleLoadGame = () => {
-    setStart(false);
-  };
+  useEffect(() => {
+    if (
+      start &&
+      createGameData &&
+      !useAiFirstMoveData &&
+      createGameData.createGame.humanColor === "BLACK"
+    ) {
+      setStart(false);
+      aiFirstMove({
+        variables: {
+          humanPlayerId: createGameData.createGame.humanPlayerId,
+        },
+      });
+    } else if (
+      start &&
+      createGameData &&
+      createGameData.createGame.humanColor === "WHITE"
+    ) {
+      setStart(false);
+    } else if (
+      aiFirstMoveData &&
+      !useAiFirstMoveData &&
+      !aiFirstMoveLoading &&
+      !createGameLoading &&
+      createGameData.createGame.humanColor === "BLACK"
+    ) {
+      setTimeout(() => {
+        setUseAiFirstMoveData(true);
+      }, 800);
+    }
+  }, [
+    aiFirstMoveData,
+    createGameData,
+    start,
+    useAiFirstMoveData,
+    aiFirstMoveLoading,
+    createGameLoading,
+  ]);
 
   if (start) {
     return (
@@ -60,18 +98,6 @@ const Game = () => {
     );
   }
 
-  // if (loadGameData) {
-  //   return (
-  //     <GameBoard
-  //       pieceLocationsProp={loadGameData.pieceLocations}
-  //       possibleMovesProp={loadGameData.possibleMoves}
-  //       humanWinnerProp={loadGameData.humanWinner}
-  //       aiWinnerProp={loadGameData.aiWinner}
-  //       humanColorProp={loadGameData.humanColor}
-  //     />
-  //   );
-  // }
-
   if (createGameData) {
     return (
       <Box sx={{ backgroundColor: "#80423d" }}>
@@ -97,12 +123,28 @@ const Game = () => {
         </Button>
         <Container>
           <GameBoard
-            pieceLocationsProp={createGameData.createGame.pieceLocations}
-            possibleMovesProp={createGameData.createGame.possibleMoves}
+            pieceLocationsProp={
+              useAiFirstMoveData
+                ? aiFirstMoveData.aiFirstMove.pieceLocations
+                : createGameData.createGame.pieceLocations
+            }
+            possibleMovesProp={
+              useAiFirstMoveData
+                ? aiFirstMoveData.aiFirstMove.possibleMoves
+                : createGameData.createGame.possibleMoves
+            }
             humanWinnerProp={createGameData.createGame.humanWinner}
             aiWinnerProp={createGameData.createGame.aiWinner}
             humanColorProp={createGameData.createGame.humanColor}
             humanPlayerIdProp={createGameData.createGame.humanPlayerId}
+            boardIsInteractableProp={
+              useAiFirstMoveData
+                ? true
+                : createGameData.createGamehumanColor === "WHITE"
+                ? true
+                : false
+            }
+            aiFirstMoveCompleteProp={useAiFirstMoveData}
           />
         </Container>
       </Box>

@@ -23,6 +23,8 @@ type GameBoardProps = {
   aiWinnerProp: boolean;
   humanColorProp: Color;
   humanPlayerIdProp: string;
+  boardIsInteractableProp: boolean;
+  aiFirstMoveCompleteProp: boolean;
 };
 
 const GameBoard = (props: GameBoardProps) => {
@@ -33,8 +35,12 @@ const GameBoard = (props: GameBoardProps) => {
     aiWinnerProp,
     humanColorProp,
     humanPlayerIdProp,
+    boardIsInteractableProp,
+    aiFirstMoveCompleteProp,
   } = props;
 
+  const [aiFirstMoveComplete, setAiFirstMoveComplete] =
+    useState<boolean>(false);
   const [selected, setSelected] = useState<boolean[][]>(
     generateSelectedSquare()
   );
@@ -49,7 +55,9 @@ const GameBoard = (props: GameBoardProps) => {
     possibleMoves: PossibleMovesAssignedToPieces;
     pieceLocations: PieceLocations;
   }>({ possibleMoves, pieceLocations });
-  const [boardIsInteractable, setBoardIsInteractable] = useState<boolean>(true);
+  const [boardIsInteractable, setBoardIsInteractable] = useState<boolean>(
+    boardIsInteractableProp
+  );
   const [humanWinner, setHumanWinner] = useState<boolean>(humanWinnerProp);
   const [aiWinner, setAiWinner] = useState<boolean>(aiWinnerProp);
 
@@ -57,8 +65,6 @@ const GameBoard = (props: GameBoardProps) => {
     doTurn,
     { loading: doTurnLoading, error: doTurnError, data: doTurnData },
   ] = useMutation(DO_TURN);
-
-  // TODO check for winner
 
   const handleClickSpot = (row: number, column: number) => {
     if (
@@ -130,7 +136,12 @@ const GameBoard = (props: GameBoardProps) => {
   };
 
   useEffect(() => {
-    if (
+    if (aiFirstMoveCompleteProp !== aiFirstMoveComplete) {
+      setPieceLocations(pieceLocationsProp);
+      setPossibleMoves(possibleMovesProp);
+      setBoardIsInteractable(boardIsInteractableProp);
+      setAiFirstMoveComplete(aiFirstMoveCompleteProp);
+    } else if (
       doTurnData &&
       (doTurnData.doTurn.possibleMoves !==
         dataFromServerAfterMove.possibleMoves ||
@@ -159,8 +170,10 @@ const GameBoard = (props: GameBoardProps) => {
     }
   }, [
     doTurnData,
-    dataFromServerAfterMove.possibleMoves,
-    dataFromServerAfterMove.pieceLocations,
+    pieceLocationsProp,
+    possibleMovesProp,
+    boardIsInteractableProp,
+    aiFirstMoveCompleteProp,
   ]);
 
   return (

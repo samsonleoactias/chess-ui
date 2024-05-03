@@ -26,9 +26,7 @@ const Game = () => {
   ] = useMutation(CREATE_GAME);
 
   const handleNewGame = () => {
-    newGame({
-      variables: { humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8" },
-    });
+    newGame();
     setStart(false);
   };
 
@@ -121,6 +119,7 @@ const Game = () => {
             humanWinnerProp={createGameData.createGame.humanWinner}
             aiWinnerProp={createGameData.createGame.aiWinner}
             humanColorProp={createGameData.createGame.humanColor}
+            humanPlayerIdProp={createGameData.createGame.humanPlayerId}
           />
         </Container>
       </>

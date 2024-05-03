@@ -1,8 +1,9 @@
 import { gql } from "@apollo/client";
 
 const CREATE_GAME = gql`
-  mutation CreateGame($humanPlayerId: String!) {
+  mutation CreateGame($humanPlayerId: String) {
     createGame(humanPlayerId: $humanPlayerId) {
+      humanPlayerId
       humanColor
       pieceLocations {
         humanPawnA {

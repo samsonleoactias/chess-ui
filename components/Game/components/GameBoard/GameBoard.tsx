@@ -22,6 +22,7 @@ type GameBoardProps = {
   humanWinnerProp: boolean;
   aiWinnerProp: boolean;
   humanColorProp: Color;
+  humanPlayerIdProp: string;
 };
 
 const GameBoard = (props: GameBoardProps) => {
@@ -31,6 +32,7 @@ const GameBoard = (props: GameBoardProps) => {
     humanWinnerProp,
     aiWinnerProp,
     humanColorProp,
+    humanPlayerIdProp,
   } = props;
 
   const [selected, setSelected] = useState<boolean[][]>(
@@ -106,7 +108,7 @@ const GameBoard = (props: GameBoardProps) => {
       // TODO: side effects in this query
       doTurn({
         variables: {
-          humanPlayerId: "03fdbefb-5d47-460c-857f-6890496d6fe8",
+          humanPlayerId: humanPlayerIdProp,
           piece: activePiece.toString(),
           move: JSON.stringify({ location: { row, column } }),
         },

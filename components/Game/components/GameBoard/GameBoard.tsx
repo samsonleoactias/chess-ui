@@ -157,7 +157,11 @@ const GameBoard = (props: GameBoardProps) => {
         }, 800);
       }
     }
-  });
+  }, [
+    doTurnData,
+    dataFromServerAfterMove.possibleMoves,
+    dataFromServerAfterMove.pieceLocations,
+  ]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Piece, PossibleMove } from "@/types";
 
-const generateActiveSideEffectSquares = (
+const generateSideEffectsForActivePossibleMoves = (
   possibleMoves?: PossibleMove[]
 ): {
   piece: Piece;
@@ -31,4 +31,4 @@ const generateActiveSideEffectSquares = (
   return squares;
 };
 
-export default generateActiveSideEffectSquares;
+export default generateSideEffectsForActivePossibleMoves;

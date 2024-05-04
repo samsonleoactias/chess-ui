@@ -1,11 +1,11 @@
 import generateSelectedSquare from "./generateSelectedSquare";
 import generateActivePossibleMovesSquares from "./generateActivePossibleMovesSquares";
 import determineActiveSquare from "./determineActiveSquare";
-import generateActiveSideEffectSquares from "./generateActiveSideEffectSquares";
+import generateSideEffectsForActivePossibleMoves from "./generateSideEffectsForActivePossibleMoves";
 
 export {
   generateSelectedSquare,
   generateActivePossibleMovesSquares,
   determineActiveSquare,
-  generateActiveSideEffectSquares,
+  generateSideEffectsForActivePossibleMoves,
 };

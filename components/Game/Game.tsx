@@ -140,7 +140,7 @@ const Game = () => {
             boardIsInteractableProp={
               useAiFirstMoveData
                 ? true
-                : createGameData.createGamehumanColor === "WHITE"
+                : createGameData.createGame.humanColor === "WHITE"
                 ? true
                 : false
             }

@@ -12,7 +12,7 @@ import {
   generateSelectedSquare,
   generateActivePossibleMovesSquares,
   determineActiveSquare,
-  generateActiveSideEffectSquares,
+  generateSideEffectsForActivePossibleMoves,
 } from "./helpers";
 import { DO_TURN } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
@@ -48,13 +48,19 @@ const GameBoard = (props: GameBoardProps) => {
   const [activePossibleMoves, setActivePossibleMoves] = useState<boolean[][]>(
     generateActivePossibleMovesSquares()
   );
-  const [activeSideEffects, setActiveSideEffects] = useState<
+  const [
+    sideEffectsForActivePossibleMoves,
+    setSideEffectsForActivePossibleMoves,
+  ] = useState<
     {
       piece: Piece;
       row: number;
       column: number;
     }[][][]
-  >(generateActiveSideEffectSquares());
+  >(generateSideEffectsForActivePossibleMoves());
+  const [activeSideEffects, setActiveSideEffects] = useState<boolean[][]>(
+    generateSelectedSquare()
+  );
   const [pieceLocations, setPieceLocations] =
     useState<PieceLocations>(pieceLocationsProp);
   const [possibleMoves, setPossibleMoves] =
@@ -69,15 +75,43 @@ const GameBoard = (props: GameBoardProps) => {
   const [humanWinner, setHumanWinner] = useState<boolean>(humanWinnerProp);
   const [aiWinner, setAiWinner] = useState<boolean>(aiWinnerProp);
   const [message, setMessage] = useState<any>(null);
-  const [sideEffectHasBeenAssessed, setSideEffectHasBeenAssessed] =
-    useState<{}>(false);
 
   const [
     doTurn,
     { loading: doTurnLoading, error: doTurnError, data: doTurnData },
   ] = useMutation(DO_TURN);
 
-  const handleClickSpot = (row: number, column: number) => {
+  const handleClickGoBack = () => {
+    setActiveSideEffects(generateSelectedSquare());
+    setSelected(generateSelectedSquare());
+    setSideEffectsForActivePossibleMoves(
+      generateSideEffectsForActivePossibleMoves()
+    );
+    setMessage("");
+  };
+
+  const handleClickYes = (row: number, column: number) => {
+    setMessage("");
+    setActiveSideEffects(generateSelectedSquare());
+    setSelected(generateSelectedSquare(row, column));
+    setActivePossibleMoves(
+      generateActivePossibleMovesSquares(
+        possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
+      )
+    );
+    setSideEffectsForActivePossibleMoves(
+      generateSideEffectsForActivePossibleMoves(
+        possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
+      )
+    );
+    handleClickSpot(row, column, true);
+  };
+
+  const handleClickSpot = (
+    row: number,
+    column: number,
+    skipSideEffectCheck?: boolean
+  ) => {
     if (
       !doTurnLoading &&
       !doTurnError &&
@@ -86,15 +120,36 @@ const GameBoard = (props: GameBoardProps) => {
       activePossibleMoves[row][column] === true &&
       boardIsInteractable
     ) {
-      if (activeSideEffects[row][column].length > 0) {
-        activeSideEffects[row][column].forEach((sideEffect) => {
+      if (
+        sideEffectsForActivePossibleMoves[row][column].length > 0 &&
+        !skipSideEffectCheck
+      ) {
+        setBoardIsInteractable(false);
+        sideEffectsForActivePossibleMoves[row][column].forEach((sideEffect) => {
+          if (sideEffect.piece !== Piece.None) {
+            setSelected(
+              generateSelectedSquare(
+                pieceLocations[sideEffect.piece].row,
+                pieceLocations[sideEffect.piece].column
+              )
+            );
+          } else {
+            throw new Error(); // TODO need better error
+          }
+          setActiveSideEffects(
+            generateSelectedSquare(sideEffect.row, sideEffect.column)
+          );
+          setActivePossibleMoves(generateActivePossibleMovesSquares());
           setMessage(
             <Container>
               <Typography fontWeight="bold">
-                Do you also want to move {sideEffect.piece} to the highlighted
-                square?
+                Do you also want to move the piece highlighted in blue to the
+                square highlighted in pink?
               </Typography>
               <Button
+                onClick={() => {
+                  handleClickYes(row, column);
+                }}
                 sx={{
                   backgroundColor: "black",
                   height: "30px",
@@ -109,6 +164,7 @@ const GameBoard = (props: GameBoardProps) => {
                 YES
               </Button>
               <Button
+                onClick={handleClickGoBack}
                 sx={{
                   backgroundColor: "black",
                   height: "30px",
@@ -163,12 +219,32 @@ const GameBoard = (props: GameBoardProps) => {
       setSelected(generateSelectedSquare());
       setActivePossibleMoves(generateActivePossibleMovesSquares());
 
-      // TODO: side effects in this query
+      sideEffectsForActivePossibleMoves[row][column].forEach((sideEffect) => {
+        if (sideEffect.piece !== Piece.None) {
+          newPieceLocations[sideEffect.piece].row = sideEffect.row;
+          newPieceLocations[sideEffect.piece].column = sideEffect.column;
+          newPieceLocations.matrix[sideEffect.row][sideEffect.column] = false;
+          newPieceLocations.matrix[newPieceLocations[sideEffect.piece].row][
+            newPieceLocations[sideEffect.piece].column
+          ] = true;
+        }
+      });
+
       doTurn({
         variables: {
           humanPlayerId: humanPlayerIdProp,
           piece: activePiece.toString(),
-          move: JSON.stringify({ location: { row, column } }),
+          move: JSON.stringify({
+            location: { row, column },
+            sideEffects: [
+              {
+                piece: sideEffectsForActivePossibleMoves[row][column][0]?.piece,
+                row: sideEffectsForActivePossibleMoves[row][column][0]?.row,
+                column:
+                  sideEffectsForActivePossibleMoves[row][column][0]?.column,
+              },
+            ],
+          }),
         },
       });
     } else if (
@@ -184,8 +260,8 @@ const GameBoard = (props: GameBoardProps) => {
           possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
         )
       );
-      setActiveSideEffects(
-        generateActiveSideEffectSquares(
+      setSideEffectsForActivePossibleMoves(
+        generateSideEffectsForActivePossibleMoves(
           possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
         )
       );
@@ -271,6 +347,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[0][0]}
                 possibleMove={activePossibleMoves[0][0]}
+                sideEffect={activeSideEffects[0][0]}
               />
             </Grid>
             <Grid
@@ -287,6 +364,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[0][1]}
                 possibleMove={activePossibleMoves[0][1]}
+                sideEffect={activeSideEffects[0][1]}
               />
             </Grid>
             <Grid
@@ -303,6 +381,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[0][2]}
                 possibleMove={activePossibleMoves[0][2]}
+                sideEffect={activeSideEffects[0][2]}
               />
             </Grid>
             <Grid
@@ -319,6 +398,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[0][3]}
                 possibleMove={activePossibleMoves[0][3]}
+                sideEffect={activeSideEffects[0][3]}
               />
             </Grid>
             <Grid
@@ -335,6 +415,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[0][4]}
                 possibleMove={activePossibleMoves[0][4]}
+                sideEffect={activeSideEffects[0][4]}
               />
             </Grid>
             <Grid
@@ -351,6 +432,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[0][5]}
                 possibleMove={activePossibleMoves[0][5]}
+                sideEffect={activeSideEffects[0][5]}
               />
             </Grid>
             <Grid
@@ -367,6 +449,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[0][6]}
                 possibleMove={activePossibleMoves[0][6]}
+                sideEffect={activeSideEffects[0][6]}
               />
             </Grid>
             <Grid
@@ -383,6 +466,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[0][7]}
                 possibleMove={activePossibleMoves[0][7]}
+                sideEffect={activeSideEffects[0][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -403,6 +487,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[1][0]}
                 possibleMove={activePossibleMoves[1][0]}
+                sideEffect={activeSideEffects[1][0]}
               />
             </Grid>
             <Grid
@@ -419,6 +504,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[1][1]}
                 possibleMove={activePossibleMoves[1][1]}
+                sideEffect={activeSideEffects[1][1]}
               />
             </Grid>
             <Grid
@@ -435,6 +521,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[1][2]}
                 possibleMove={activePossibleMoves[1][2]}
+                sideEffect={activeSideEffects[1][2]}
               />
             </Grid>
             <Grid
@@ -451,6 +538,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[1][3]}
                 possibleMove={activePossibleMoves[1][3]}
+                sideEffect={activeSideEffects[1][3]}
               />
             </Grid>
             <Grid
@@ -467,6 +555,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[1][4]}
                 possibleMove={activePossibleMoves[1][4]}
+                sideEffect={activeSideEffects[1][4]}
               />
             </Grid>
             <Grid
@@ -483,6 +572,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[1][5]}
                 possibleMove={activePossibleMoves[1][5]}
+                sideEffect={activeSideEffects[1][5]}
               />
             </Grid>
             <Grid
@@ -499,6 +589,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[1][6]}
                 possibleMove={activePossibleMoves[1][6]}
+                sideEffect={activeSideEffects[1][6]}
               />
             </Grid>
             <Grid
@@ -515,6 +606,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[1][7]}
                 possibleMove={activePossibleMoves[1][7]}
+                sideEffect={activeSideEffects[1][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -535,6 +627,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[2][0]}
                 possibleMove={activePossibleMoves[2][0]}
+                sideEffect={activeSideEffects[2][0]}
               />
             </Grid>
             <Grid
@@ -551,6 +644,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[2][1]}
                 possibleMove={activePossibleMoves[2][1]}
+                sideEffect={activeSideEffects[2][1]}
               />
             </Grid>
             <Grid
@@ -567,6 +661,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[2][2]}
                 possibleMove={activePossibleMoves[2][2]}
+                sideEffect={activeSideEffects[2][2]}
               />
             </Grid>
             <Grid
@@ -583,6 +678,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[2][3]}
                 possibleMove={activePossibleMoves[2][3]}
+                sideEffect={activeSideEffects[2][3]}
               />
             </Grid>
             <Grid
@@ -599,6 +695,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[2][4]}
                 possibleMove={activePossibleMoves[2][4]}
+                sideEffect={activeSideEffects[2][4]}
               />
             </Grid>
             <Grid
@@ -615,6 +712,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[2][5]}
                 possibleMove={activePossibleMoves[2][5]}
+                sideEffect={activeSideEffects[2][5]}
               />
             </Grid>
             <Grid
@@ -631,6 +729,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[2][6]}
                 possibleMove={activePossibleMoves[2][6]}
+                sideEffect={activeSideEffects[2][6]}
               />
             </Grid>
             <Grid
@@ -647,6 +746,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[2][7]}
                 possibleMove={activePossibleMoves[2][7]}
+                sideEffect={activeSideEffects[2][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -667,6 +767,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[3][0]}
                 possibleMove={activePossibleMoves[3][0]}
+                sideEffect={activeSideEffects[3][0]}
               />
             </Grid>
             <Grid
@@ -683,6 +784,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[3][1]}
                 possibleMove={activePossibleMoves[3][1]}
+                sideEffect={activeSideEffects[3][1]}
               />
             </Grid>
             <Grid
@@ -699,6 +801,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[3][2]}
                 possibleMove={activePossibleMoves[3][2]}
+                sideEffect={activeSideEffects[3][2]}
               />
             </Grid>
             <Grid
@@ -715,6 +818,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[3][3]}
                 possibleMove={activePossibleMoves[3][3]}
+                sideEffect={activeSideEffects[3][3]}
               />
             </Grid>
             <Grid
@@ -731,6 +835,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[3][4]}
                 possibleMove={activePossibleMoves[3][4]}
+                sideEffect={activeSideEffects[3][4]}
               />
             </Grid>
             <Grid
@@ -747,6 +852,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[3][5]}
                 possibleMove={activePossibleMoves[3][5]}
+                sideEffect={activeSideEffects[3][5]}
               />
             </Grid>
             <Grid
@@ -763,6 +869,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[3][6]}
                 possibleMove={activePossibleMoves[3][6]}
+                sideEffect={activeSideEffects[3][6]}
               />
             </Grid>
             <Grid
@@ -779,6 +886,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[3][7]}
                 possibleMove={activePossibleMoves[3][7]}
+                sideEffect={activeSideEffects[3][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -799,6 +907,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[4][0]}
                 possibleMove={activePossibleMoves[4][0]}
+                sideEffect={activeSideEffects[4][0]}
               />
             </Grid>
             <Grid
@@ -815,6 +924,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[4][1]}
                 possibleMove={activePossibleMoves[4][1]}
+                sideEffect={activeSideEffects[4][1]}
               />
             </Grid>
             <Grid
@@ -831,6 +941,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[4][2]}
                 possibleMove={activePossibleMoves[4][2]}
+                sideEffect={activeSideEffects[4][2]}
               />
             </Grid>
             <Grid
@@ -847,6 +958,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[4][3]}
                 possibleMove={activePossibleMoves[4][3]}
+                sideEffect={activeSideEffects[4][3]}
               />
             </Grid>
             <Grid
@@ -863,6 +975,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[4][4]}
                 possibleMove={activePossibleMoves[4][4]}
+                sideEffect={activeSideEffects[4][4]}
               />
             </Grid>
             <Grid
@@ -879,6 +992,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[4][5]}
                 possibleMove={activePossibleMoves[4][5]}
+                sideEffect={activeSideEffects[4][5]}
               />
             </Grid>
             <Grid
@@ -895,6 +1009,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[4][6]}
                 possibleMove={activePossibleMoves[4][6]}
+                sideEffect={activeSideEffects[4][6]}
               />
             </Grid>
             <Grid
@@ -911,6 +1026,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[4][7]}
                 possibleMove={activePossibleMoves[4][7]}
+                sideEffect={activeSideEffects[4][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -931,6 +1047,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[5][0]}
                 possibleMove={activePossibleMoves[5][0]}
+                sideEffect={activeSideEffects[5][0]}
               />
             </Grid>
             <Grid
@@ -947,6 +1064,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[5][1]}
                 possibleMove={activePossibleMoves[5][1]}
+                sideEffect={activeSideEffects[5][1]}
               />
             </Grid>
             <Grid
@@ -963,6 +1081,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[5][2]}
                 possibleMove={activePossibleMoves[5][2]}
+                sideEffect={activeSideEffects[5][2]}
               />
             </Grid>
             <Grid
@@ -979,6 +1098,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[5][3]}
                 possibleMove={activePossibleMoves[5][3]}
+                sideEffect={activeSideEffects[5][3]}
               />
             </Grid>
             <Grid
@@ -995,6 +1115,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[5][4]}
                 possibleMove={activePossibleMoves[5][4]}
+                sideEffect={activeSideEffects[5][4]}
               />
             </Grid>
             <Grid
@@ -1011,6 +1132,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[5][5]}
                 possibleMove={activePossibleMoves[5][5]}
+                sideEffect={activeSideEffects[5][5]}
               />
             </Grid>
             <Grid
@@ -1027,6 +1149,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[5][6]}
                 possibleMove={activePossibleMoves[5][6]}
+                sideEffect={activeSideEffects[5][6]}
               />
             </Grid>
             <Grid
@@ -1043,6 +1166,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[5][7]}
                 possibleMove={activePossibleMoves[5][7]}
+                sideEffect={activeSideEffects[5][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -1063,6 +1187,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[6][0]}
                 possibleMove={activePossibleMoves[6][0]}
+                sideEffect={activeSideEffects[6][0]}
               />
             </Grid>
             <Grid
@@ -1079,6 +1204,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[6][1]}
                 possibleMove={activePossibleMoves[6][1]}
+                sideEffect={activeSideEffects[6][1]}
               />
             </Grid>
             <Grid
@@ -1095,6 +1221,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[6][2]}
                 possibleMove={activePossibleMoves[6][2]}
+                sideEffect={activeSideEffects[6][2]}
               />
             </Grid>
             <Grid
@@ -1111,6 +1238,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[6][3]}
                 possibleMove={activePossibleMoves[6][3]}
+                sideEffect={activeSideEffects[6][3]}
               />
             </Grid>
             <Grid
@@ -1127,6 +1255,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[6][4]}
                 possibleMove={activePossibleMoves[6][4]}
+                sideEffect={activeSideEffects[6][4]}
               />
             </Grid>
             <Grid
@@ -1143,6 +1272,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[6][5]}
                 possibleMove={activePossibleMoves[6][5]}
+                sideEffect={activeSideEffects[6][5]}
               />
             </Grid>
             <Grid
@@ -1159,6 +1289,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[6][6]}
                 possibleMove={activePossibleMoves[6][6]}
+                sideEffect={activeSideEffects[6][6]}
               />
             </Grid>
             <Grid
@@ -1175,6 +1306,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[6][7]}
                 possibleMove={activePossibleMoves[6][7]}
+                sideEffect={activeSideEffects[6][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -1195,6 +1327,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[7][0]}
                 possibleMove={activePossibleMoves[7][0]}
+                sideEffect={activeSideEffects[7][0]}
               />
             </Grid>
             <Grid
@@ -1211,6 +1344,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[7][1]}
                 possibleMove={activePossibleMoves[7][1]}
+                sideEffect={activeSideEffects[7][1]}
               />
             </Grid>
             <Grid
@@ -1227,6 +1361,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[7][2]}
                 possibleMove={activePossibleMoves[7][2]}
+                sideEffect={activeSideEffects[7][2]}
               />
             </Grid>
             <Grid
@@ -1243,6 +1378,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[7][3]}
                 possibleMove={activePossibleMoves[7][3]}
+                sideEffect={activeSideEffects[7][3]}
               />
             </Grid>
             <Grid
@@ -1259,6 +1395,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[7][4]}
                 possibleMove={activePossibleMoves[7][4]}
+                sideEffect={activeSideEffects[7][4]}
               />
             </Grid>
             <Grid
@@ -1275,6 +1412,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[7][5]}
                 possibleMove={activePossibleMoves[7][5]}
+                sideEffect={activeSideEffects[7][5]}
               />
             </Grid>
             <Grid
@@ -1291,6 +1429,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff6f3c"
                 selected={selected[7][6]}
                 possibleMove={activePossibleMoves[7][6]}
+                sideEffect={activeSideEffects[7][6]}
               />
             </Grid>
             <Grid
@@ -1307,6 +1446,7 @@ const GameBoard = (props: GameBoardProps) => {
                 backgroundColor="#ff9a3c"
                 selected={selected[7][7]}
                 possibleMove={activePossibleMoves[7][7]}
+                sideEffect={activeSideEffects[7][7]}
               />
             </Grid>
             <Grid item xs={2}></Grid>

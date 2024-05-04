@@ -4,7 +4,7 @@ import {
   PieceLocations,
   Piece,
 } from "../../../../types";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import findWhatPieceIsOnASquare from "../../../../utils/findWhatPieceIsOnASquare";
 import GamePiece from "./components/GamePiece";
@@ -12,6 +12,7 @@ import {
   generateSelectedSquare,
   generateActivePossibleMovesSquares,
   determineActiveSquare,
+  generateActiveSideEffectSquares,
 } from "./helpers";
 import { DO_TURN } from "@/graphql/mutations";
 import { useMutation } from "@apollo/client";
@@ -47,6 +48,13 @@ const GameBoard = (props: GameBoardProps) => {
   const [activePossibleMoves, setActivePossibleMoves] = useState<boolean[][]>(
     generateActivePossibleMovesSquares()
   );
+  const [activeSideEffects, setActiveSideEffects] = useState<
+    {
+      piece: Piece;
+      row: number;
+      column: number;
+    }[][][]
+  >(generateActiveSideEffectSquares());
   const [pieceLocations, setPieceLocations] =
     useState<PieceLocations>(pieceLocationsProp);
   const [possibleMoves, setPossibleMoves] =
@@ -60,6 +68,9 @@ const GameBoard = (props: GameBoardProps) => {
   );
   const [humanWinner, setHumanWinner] = useState<boolean>(humanWinnerProp);
   const [aiWinner, setAiWinner] = useState<boolean>(aiWinnerProp);
+  const [message, setMessage] = useState<any>(null);
+  const [sideEffectHasBeenAssessed, setSideEffectHasBeenAssessed] =
+    useState<{}>(false);
 
   const [
     doTurn,
@@ -75,6 +86,47 @@ const GameBoard = (props: GameBoardProps) => {
       activePossibleMoves[row][column] === true &&
       boardIsInteractable
     ) {
+      if (activeSideEffects[row][column].length > 0) {
+        activeSideEffects[row][column].forEach((sideEffect) => {
+          setMessage(
+            <Container>
+              <Typography fontWeight="bold">
+                Do you also want to move {sideEffect.piece} to the highlighted
+                square?
+              </Typography>
+              <Button
+                sx={{
+                  backgroundColor: "black",
+                  height: "30px",
+                  border: 4,
+                  borderColor: "#ff9a3c",
+                  width: "150px",
+                  color: "#ff6f3c",
+                  fontWeight: "bold",
+                  mr: "50px",
+                }}
+              >
+                YES
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor: "black",
+                  height: "30px",
+                  border: 4,
+                  borderColor: "#ff9a3c",
+                  width: "150px",
+                  color: "#ff6f3c",
+                  fontWeight: "bold",
+                }}
+              >
+                GO BACK
+              </Button>
+            </Container>
+          );
+        });
+
+        return;
+      }
       setBoardIsInteractable(false);
 
       let newPieceLocations: PieceLocations = pieceLocations;
@@ -132,6 +184,11 @@ const GameBoard = (props: GameBoardProps) => {
           possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
         )
       );
+      setActiveSideEffects(
+        generateActiveSideEffectSquares(
+          possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
+        )
+      );
     }
   };
 
@@ -148,7 +205,6 @@ const GameBoard = (props: GameBoardProps) => {
         doTurnData.doTurn.pieceLocations !==
           dataFromServerAfterMove.pieceLocations)
     ) {
-      // TODO program to declare victory with checkmate instead, will happen on backend
       if (doTurnData.doTurn.humanWinner) {
         setHumanWinner(true);
       } else if (doTurnData.doTurn.aiWinner) {
@@ -182,7 +238,7 @@ const GameBoard = (props: GameBoardProps) => {
         sx={{
           mt: "10px",
           backgroundColor: "black",
-          height: "50px",
+          height: "100px",
           width: "60%",
         }}
       >
@@ -190,7 +246,11 @@ const GameBoard = (props: GameBoardProps) => {
           align="center"
           sx={{ color: "#ff9a3c", p: "15px", fontWeight: "bold" }}
         >
-          {humanWinner ? "YOU WIN! COOL!" : aiWinner ? "YOU LOSE! BUMMER!" : ""}
+          {humanWinner
+            ? "YOU WIN! COOL!"
+            : aiWinner
+            ? "YOU LOSE! BUMMER!"
+            : message}
         </Typography>
       </Container>
       <Container sx={{ width: "60%" }}>

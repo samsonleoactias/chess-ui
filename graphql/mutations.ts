@@ -179,6 +179,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnB {
           location {
@@ -190,6 +191,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnC {
           location {
@@ -201,6 +203,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnD {
           location {
@@ -212,6 +215,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnE {
           location {
@@ -223,6 +227,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnF {
           location {
@@ -234,6 +239,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnG {
           location {
@@ -245,6 +251,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnH {
           location {
@@ -256,6 +263,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookA {
           location {
@@ -267,6 +275,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookB {
           location {
@@ -278,6 +287,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightA {
           location {
@@ -289,6 +299,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightB {
           location {
@@ -300,6 +311,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopA {
           location {
@@ -311,6 +323,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopB {
           location {
@@ -322,6 +335,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanQueen {
           location {
@@ -333,6 +347,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKing {
           location {
@@ -344,6 +359,7 @@ const CREATE_GAME = gql`
             row
             column
           }
+          enPassantCapture
         }
       }
     }
@@ -530,6 +546,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnB {
           location {
@@ -541,6 +558,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnC {
           location {
@@ -552,6 +570,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnD {
           location {
@@ -563,6 +582,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnE {
           location {
@@ -574,6 +594,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnF {
           location {
@@ -585,6 +606,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnG {
           location {
@@ -596,6 +618,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnH {
           location {
@@ -607,6 +630,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookA {
           location {
@@ -618,6 +642,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookB {
           location {
@@ -629,6 +654,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightA {
           location {
@@ -640,6 +666,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightB {
           location {
@@ -651,6 +678,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopA {
           location {
@@ -662,6 +690,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopB {
           location {
@@ -673,6 +702,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanQueen {
           location {
@@ -684,6 +714,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKing {
           location {
@@ -695,6 +726,7 @@ const DO_TURN = gql`
             row
             column
           }
+          enPassantCapture
         }
       }
     }
@@ -878,6 +910,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnB {
           location {
@@ -889,6 +922,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnC {
           location {
@@ -900,6 +934,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnD {
           location {
@@ -911,6 +946,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnE {
           location {
@@ -922,6 +958,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnF {
           location {
@@ -933,6 +970,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnG {
           location {
@@ -944,6 +982,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanPawnH {
           location {
@@ -955,6 +994,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookA {
           location {
@@ -966,6 +1006,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanRookB {
           location {
@@ -977,6 +1018,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightA {
           location {
@@ -988,6 +1030,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKnightB {
           location {
@@ -999,6 +1042,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopA {
           location {
@@ -1010,6 +1054,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanBishopB {
           location {
@@ -1021,6 +1066,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanQueen {
           location {
@@ -1032,6 +1078,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
         humanKing {
           location {
@@ -1043,6 +1090,7 @@ const AI_FIRST_MOVE = gql`
             row
             column
           }
+          enPassantCapture
         }
       }
     }

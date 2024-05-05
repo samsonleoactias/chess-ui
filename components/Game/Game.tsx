@@ -8,6 +8,7 @@ import { AI_FIRST_MOVE, CREATE_GAME } from "@/graphql/mutations";
 const Game = () => {
   const [start, setStart] = useState<boolean>(true);
   const [useAiFirstMoveData, setUseAiFirstMoveData] = useState<boolean>(false);
+  const [newGameIsClickable, setNewGameIsClickable] = useState<boolean>(true);
 
   const [
     newGame,
@@ -28,9 +29,13 @@ const Game = () => {
   ] = useMutation(AI_FIRST_MOVE);
 
   const handleNewGame = () => {
+    setNewGameIsClickable(false);
     setUseAiFirstMoveData(false);
     setStart(true);
     newGame();
+    setTimeout(() => {
+      setNewGameIsClickable(true);
+    }, 1000);
   };
 
   useEffect(() => {
@@ -103,14 +108,15 @@ const Game = () => {
       <Box sx={{ backgroundColor: "#80423d" }}>
         <Button
           onClick={handleNewGame}
+          disabled={!newGameIsClickable}
           sx={{
             m: "15px",
             objectPosition: "left top",
             float: "left",
-            backgroundColor: "#ff9a3c",
+            backgroundColor: newGameIsClickable ? "#ff9a3c" : "gray",
             height: "50px",
             border: 4,
-            borderColor: "black",
+            borderColor: newGameIsClickable ? "black" : "gray",
             width: "200px",
           }}
         >

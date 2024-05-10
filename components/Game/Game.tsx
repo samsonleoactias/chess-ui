@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GameBoard from "./components/GameBoard/GameBoard";
 import { Box, Button, Container, Typography } from "@mui/material";
-import { useMutation, useQuery } from "@apollo/client";
-import GET_GAME from "@/graphql/queries";
+import { useMutation } from "@apollo/client";
 import { AI_FIRST_MOVE, CREATE_GAME } from "@/graphql/mutations";
 
 const Game = () => {

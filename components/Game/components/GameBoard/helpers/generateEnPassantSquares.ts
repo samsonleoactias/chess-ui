@@ -85,13 +85,14 @@ const generateEnPassantSquares = (
       Piece.None,
     ],
   ];
-
+  console.log("test1");
   possibleMoves?.forEach((possibleMove) => {
     if (possibleMove.enPassantCapture) {
       squares[possibleMove.location.row][possibleMove.location.column] =
         possibleMove.enPassantCapture;
     }
   });
+  console.log("test2");
 
   return squares;
 };

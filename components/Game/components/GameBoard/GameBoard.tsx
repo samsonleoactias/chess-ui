@@ -99,6 +99,7 @@ const GameBoard = (props: GameBoardProps) => {
   const handleClickYes = (row: number, column: number) => {
     setMessage("");
     setActiveSideEffects(generateSelectedSquare());
+    setActiveEnPassant(generateSelectedSquare());
     setSelected(generateSelectedSquare(row, column));
     setActivePossibleMoves(
       generateActivePossibleMovesSquares(
@@ -107,6 +108,11 @@ const GameBoard = (props: GameBoardProps) => {
     );
     setSideEffectsForActivePossibleMoves(
       generateSideEffectsForActivePossibleMoves(
+        possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
+      )
+    );
+    setEnPassantForActivePossibleMoves(
+      generateEnPassantSquares(
         possibleMoves[findWhatPieceIsOnASquare(pieceLocations, row, column)]
       )
     );
@@ -290,6 +296,10 @@ const GameBoard = (props: GameBoardProps) => {
         }
       });
 
+      if (enPassantPiece !== Piece.None) {
+        newPieceLocations[enPassantPiece].captured = true;
+      }
+
       doTurn({
         variables: {
           humanPlayerId: humanPlayerIdProp,
@@ -304,6 +314,8 @@ const GameBoard = (props: GameBoardProps) => {
                   sideEffectsForActivePossibleMoves[row][column][0]?.column,
               },
             ],
+            enPassantCapture:
+              enPassantPiece !== Piece.None ? enPassantPiece : null,
           }),
         },
       });

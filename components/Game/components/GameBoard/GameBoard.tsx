@@ -358,7 +358,10 @@ const GameBoard = (props: GameBoardProps) => {
         doTurnData.doTurn.pieceLocations !==
           dataFromServerAfterMove.pieceLocations)
     ) {
-      if (doTurnData.doTurn.humanWinner) {
+      if (doTurnData.doTurn.humanWinner && doTurnData.doTurn.aiWinner) {
+        setHumanWinner(true);
+        setAiWinner(true);
+      } else if (doTurnData.doTurn.humanWinner) {
         setHumanWinner(true);
       } else if (doTurnData.doTurn.aiWinner) {
         setAiWinner(true);
@@ -399,7 +402,9 @@ const GameBoard = (props: GameBoardProps) => {
           align="center"
           sx={{ color: "#ff9a3c", p: "15px", fontWeight: "bold" }}
         >
-          {humanWinner
+          {humanWinner && aiWinner
+            ? "STALEMATE! THERE ARE NO POSSIBLE MOVES."
+            : humanWinner
             ? "YOU WIN! COOL!"
             : aiWinner
             ? "YOU LOSE! BUMMER!"

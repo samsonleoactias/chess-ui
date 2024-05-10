@@ -386,6 +386,9 @@ const GameBoard = (props: GameBoardProps) => {
     possibleMovesProp,
     boardIsInteractableProp,
     aiFirstMoveCompleteProp,
+    aiFirstMoveComplete,
+    dataFromServerAfterMove.pieceLocations,
+    dataFromServerAfterMove.possibleMoves,
   ]);
 
   return (

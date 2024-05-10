@@ -74,6 +74,7 @@ const Game = () => {
     useAiFirstMoveData,
     aiFirstMoveLoading,
     createGameLoading,
+    aiFirstMove,
   ]);
 
   if (start) {

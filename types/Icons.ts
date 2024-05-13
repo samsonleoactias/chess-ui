@@ -1,0 +1,37 @@
+type Icons = {
+  humanPawnA: string;
+  humanPawnB: string;
+  humanPawnC: string;
+  humanPawnD: string;
+  humanPawnE: string;
+  humanPawnF: string;
+  humanPawnG: string;
+  humanPawnH: string;
+  humanRookA: string;
+  humanRookB: string;
+  humanKnightA: string;
+  humanKnightB: string;
+  humanBishopA: string;
+  humanBishopB: string;
+  humanQueen: string;
+  humanKing: string;
+  aiPawnA: string;
+  aiPawnB: string;
+  aiPawnC: string;
+  aiPawnD: string;
+  aiPawnE: string;
+  aiPawnF: string;
+  aiPawnG: string;
+  aiPawnH: string;
+  aiRookA: string;
+  aiRookB: string;
+  aiKnightA: string;
+  aiKnightB: string;
+  aiBishopA: string;
+  aiBishopB: string;
+  aiQueen: string;
+  aiKing: string;
+  none: string;
+};
+
+export default Icons;

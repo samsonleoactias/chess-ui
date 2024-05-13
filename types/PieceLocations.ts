@@ -1,5 +1,4 @@
 type PieceLocations = {
-  // TODO see if making a double array of pieces works better
   humanPawnA: {
     row: number;
     column: number;

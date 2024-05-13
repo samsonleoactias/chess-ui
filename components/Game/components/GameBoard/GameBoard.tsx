@@ -146,7 +146,7 @@ const GameBoard = (props: GameBoardProps) => {
               )
             );
           } else {
-            throw new Error(); // TODO need better error
+            throw new Error("Cannot have a side effect on Piece None.");
           }
           setActiveSideEffects(
             generateSelectedSquare(sideEffect.row, sideEffect.column)

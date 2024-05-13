@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Color, Piece } from "../../../../../types";
-import { makePieceSvgData, makePieceIcon, isHumanPiece } from "./helpers";
+import { makePieceSvgData, isHumanPiece } from "./helpers";
 import Image from "next/image";
 
 type GamePieceProps = {

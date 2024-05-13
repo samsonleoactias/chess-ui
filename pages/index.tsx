@@ -1,4 +1,3 @@
-import Start from "@/components/Start/Start";
 import Head from "next/head";
 
 const Home = () => {

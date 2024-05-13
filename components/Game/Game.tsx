@@ -3,6 +3,7 @@ import GameBoard from "./components/GameBoard/GameBoard";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { AI_FIRST_MOVE, CREATE_GAME } from "@/graphql/mutations";
+import { ImageCredit } from "./components";
 
 const Game = () => {
   const [start, setStart] = useState<boolean>(true);
@@ -79,27 +80,30 @@ const Game = () => {
 
   if (start) {
     return (
-      <Button
-        onClick={handleNewGame}
-        sx={{
-          m: "15px",
-          mt: "25px",
-          objectPosition: "left top",
-          float: "left",
-          backgroundColor: "#ff9a3c",
-          height: "50px",
-          border: 4,
-          borderColor: "black",
-          width: "200px",
-        }}
-      >
-        <Typography
-          align="center"
-          sx={{ color: "black", p: "15px", fontWeight: "bold" }}
+      <>
+        <Button
+          onClick={handleNewGame}
+          sx={{
+            m: "15px",
+            mt: "25px",
+            objectPosition: "left top",
+            float: "left",
+            backgroundColor: "#ff9a3c",
+            height: "50px",
+            border: 4,
+            borderColor: "black",
+            width: "200px",
+          }}
         >
-          New Game
-        </Typography>
-      </Button>
+          <Typography
+            align="center"
+            sx={{ color: "black", p: "15px", fontWeight: "bold" }}
+          >
+            New Game
+          </Typography>
+        </Button>
+        <ImageCredit />
+      </>
     );
   }
 
@@ -153,6 +157,7 @@ const Game = () => {
             aiFirstMoveCompleteProp={useAiFirstMoveData}
           />
         </Container>
+        <ImageCredit />
       </Box>
     );
   }
